@@ -1,14 +1,14 @@
-package com.SocketTrench.Sprite;
+package com.SocketTrench.GameObject;
 
 import java.awt.Image;
 
 import com.SocketTrench.ImageLoader;
 
-public final class ShootSprite {
+public final class ShootGameObject {
     private Sprite sprite;
     private Image texture;
 
-    public ShootSprite() {
+    public ShootGameObject() {
         this.sprite = new Sprite(58, 30, 0, 0);
         this.texture = ImageLoader.fromPath("shoot.png");
     }

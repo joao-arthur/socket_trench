@@ -1,4 +1,4 @@
-package com.SocketTrench.Sprite;
+package com.SocketTrench.GameObject;
 
 public final class Sprite {
     public int width;
@@ -7,11 +7,10 @@ public final class Sprite {
     public int y;
 
     public Sprite(
-        int width,
-        int height,
-        int x,
-        int y
-    ) {
+            int width,
+            int height,
+            int x,
+            int y) {
         this.width = width;
         this.height = height;
         this.x = x;
