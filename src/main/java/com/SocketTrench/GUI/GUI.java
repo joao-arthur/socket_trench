@@ -1,6 +1,6 @@
 package com.SocketTrench.GUI;
 
-public class GUI {
+public final class GUI {
     private static GUI instance;
     private GUIScreen currentScreen;
 

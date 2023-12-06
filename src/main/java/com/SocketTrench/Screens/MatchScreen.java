@@ -2,12 +2,11 @@ package com.SocketTrench.Screens;
 
 import java.awt.Component;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import com.SocketTrench.GUI.GUIScreen;
 
-public class MatchScreen implements GUIScreen {
+public final class MatchScreen implements GUIScreen {
     private final JFrame frame;
 
     public MatchScreen() {

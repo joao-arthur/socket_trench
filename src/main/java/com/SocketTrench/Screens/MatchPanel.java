@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import com.SocketTrench.ImageLoader;
 
-public class MatchPanel extends JPanel {
+public final class MatchPanel extends JPanel {
     private Image background;
     private Image player1;
     private Image player2;
