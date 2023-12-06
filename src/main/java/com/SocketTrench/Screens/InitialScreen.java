@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
 public final class InitialScreen implements GUIScreen {
@@ -33,6 +34,9 @@ public final class InitialScreen implements GUIScreen {
         createMatch.setMaximumSize(buttonSize);
         createMatch.setText("CREATE MATCH");
         createMatch.setFont(buttonFont);
+        createMatch.addActionListener(event -> {
+            GUI.getInstance().goTo(new MatchScreen());
+        });
 
         connectMatch.setPreferredSize(buttonSize);
         connectMatch.setMaximumSize(buttonSize);
