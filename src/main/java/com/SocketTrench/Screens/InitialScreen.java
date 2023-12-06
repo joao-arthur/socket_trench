@@ -1,7 +1,9 @@
 package com.SocketTrench.Screens;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -9,39 +11,40 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public final class InitialScreen {
-    private final JFrame screenFrame;
+import com.SocketTrench.GUI.GUIScreen;
+
+public final class InitialScreen implements GUIScreen {
+    private final JFrame frame;
+    private final JButton createMatch;
+    private final JButton connectMatch;
 
     public InitialScreen() {
-        this.screenFrame = new JFrame();
+        this.frame = new JFrame();
+        this.createMatch = new JButton();
+        this.connectMatch = new JButton();
         this.initComponents();
     }
 
     private void initComponents() {
-        screenFrame.setVisible(true);
-        screenFrame.setSize(700, 500);
-        screenFrame.setTitle("Socket Trench");
-        screenFrame.setLocationRelativeTo(null);
-        screenFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        final var buttonSize = new Dimension(250, 50);
+        final var buttonFont = new Font("Arial", 0, 20);
 
-        final var buttonSize = new Dimension(250, 35);
+        createMatch.setPreferredSize(buttonSize);
+        createMatch.setMaximumSize(buttonSize);
+        createMatch.setText("CREATE MATCH");
+        createMatch.setFont(buttonFont);
 
-        final var createMatchButton = new JButton();
-        createMatchButton.setPreferredSize(buttonSize);
-        createMatchButton.setMaximumSize(buttonSize);
-        createMatchButton.setText("CREATE MATCH");
-
-        final var connectMatchButton = new JButton();
-        connectMatchButton.setPreferredSize(buttonSize);
-        connectMatchButton.setMaximumSize(buttonSize);
-        connectMatchButton.setText("CONNECT TO MATCH");
+        connectMatch.setPreferredSize(buttonSize);
+        connectMatch.setMaximumSize(buttonSize);
+        connectMatch.setText("CONNECT TO MATCH");
+        connectMatch.setFont(buttonFont);
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
-        content.add(createMatchButton);
+        content.add(createMatch);
         content.add(Box.createVerticalGlue());
-        content.add(connectMatchButton);
+        content.add(connectMatch);
         content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
@@ -52,7 +55,30 @@ public final class InitialScreen {
         container.add(Box.createVerticalGlue());
         container.add(Box.createHorizontalGlue());
 
-        screenFrame.add(container);
-        container.revalidate();
+        frame.add(container);
+
+        frame.setTitle("Socket Trench");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(700, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public void dispose() {
+        frame.dispose();
+    }
+
+    public Component getScreen() {
+        return frame;
+    }
+
+    public void enable() {
+        createMatch.setEnabled(true);
+        connectMatch.setEnabled(true);
+    }
+
+    public void disable() {
+        createMatch.setEnabled(false);
+        connectMatch.setEnabled(false);
     }
 }
