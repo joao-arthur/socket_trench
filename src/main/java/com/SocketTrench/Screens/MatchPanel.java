@@ -8,13 +8,14 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 
-import com.SocketTrench.Match.MatchModel;
+import com.SocketTrench.Events.Observer;
+import com.SocketTrench.Match.MatchService;
 
-public final class MatchPanel extends JPanel {
-    private final MatchModel matchModel;
+public final class MatchPanel extends JPanel implements Observer {
+    private final MatchService matchService;
 
-    public MatchPanel(MatchModel matchModel) {
-        this.matchModel = matchModel;
+    public MatchPanel(MatchService matchService) {
+        this.matchService = matchService;
         this.initComponents();
     }
 
@@ -23,14 +24,13 @@ public final class MatchPanel extends JPanel {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent event) {
-                // .sendMessage(event.)
+                // .dispatch(event.)
             }
 
             @Override
             public void keyReleased(KeyEvent event) {
-                // .sendMessage(event.)
+                // .dispatch(event.)
             }
-
         });
         this.setFocusable(true);
     }
@@ -38,12 +38,17 @@ public final class MatchPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         final var drawer = (Graphics2D) g;
-        final var background = this.matchModel.background;
-        final var player1 = this.matchModel.player1;
-        final var player2 = this.matchModel.player2;
+        final var model = matchService.getModel();
+        final var background = model.background;
+        final var player1 = model.player1;
+        final var player2 = model.player2;
 
         drawer.drawImage(background.texture, background.sprite.x, background.sprite.y, this);
         drawer.drawImage(player1.texture, player1.sprite.x, player1.sprite.y, this);
         drawer.drawImage(player2.texture, player2.sprite.x, player2.sprite.y, this);
+    }
+
+    public void handle(String event) {
+        this.repaint();
     }
 }

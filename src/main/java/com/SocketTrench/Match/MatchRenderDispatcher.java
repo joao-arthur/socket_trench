@@ -6,7 +6,7 @@ import java.util.List;
 import com.SocketTrench.Events.Dispatcher;
 import com.SocketTrench.Events.Observer;
 
-final class MatchRenderDispatcher implements Dispatcher {
+public final class MatchRenderDispatcher implements Dispatcher {
     public final List<Observer> observers = new LinkedList<Observer>();
 
     public void dispatch(String event) {
