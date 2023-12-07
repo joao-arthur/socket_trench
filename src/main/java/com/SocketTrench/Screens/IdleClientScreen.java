@@ -23,20 +23,20 @@ public final class IdleClientScreen implements GUIScreen {
     }
 
     private void initComponents() {
-        final var ipInfo = new JLabel();
-        ipInfo.setPreferredSize(new Dimension(400, 50));
-        ipInfo.setMaximumSize(new Dimension(400, 50));
-        ipInfo.setHorizontalAlignment(JLabel.CENTER);
-        ipInfo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        ipInfo.setFont(new Font("Arial", Font.PLAIN, 20));
-        ipInfo.setText("INPUT THE IP");
+        final var info = new JLabel();
+        info.setPreferredSize(new Dimension(400, 50));
+        info.setMaximumSize(new Dimension(400, 50));
+        info.setHorizontalAlignment(JLabel.CENTER);
+        info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        info.setFont(new Font("Arial", Font.PLAIN, 20));
+        info.setText("INPUT THE IP");
 
-        final var ipInput = new JTextField();
-        ipInput.setPreferredSize(new Dimension(400, 50));
-        ipInput.setMaximumSize(new Dimension(400, 50));
-        ipInput.setMinimumSize(new Dimension(400, 50));
-        ipInput.setFont(new Font("Arial", Font.PLAIN, 30));
-        ipInput.setText("192.168.0.1");
+        final var input = new JTextField();
+        input.setPreferredSize(new Dimension(400, 50));
+        input.setMaximumSize(new Dimension(400, 50));
+        input.setMinimumSize(new Dimension(400, 50));
+        input.setFont(new Font("Arial", Font.PLAIN, 30));
+        input.setText("192.168.0.1");
 
         final var confirm = new JButton();
         confirm.setPreferredSize(new Dimension(400, 50));
@@ -44,21 +44,18 @@ public final class IdleClientScreen implements GUIScreen {
         confirm.setAlignmentX(JButton.CENTER_ALIGNMENT);
         confirm.setText("CONFIRM");
         confirm.setFont(new Font("Arial", 0, 20));
-        // confirm.addActionListener(event -> {
-        // });
+        confirm.addActionListener(event -> {
+        });
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
-        content.add(ipInfo);
-        content.add(Box.createVerticalGlue());
-        content.add(ipInput);
+        content.add(info);
+        content.add(input);
         content.add(Box.createVerticalGlue());
         content.add(confirm);
         content.add(Box.createVerticalGlue());
         content.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
-        content.setMinimumSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
-        content.setMaximumSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
 
         final var container = new JPanel(new FlowLayout());
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
