@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.GroupLayout.Alignment;
 
 import com.SocketTrench.GUI.GUIScreen;
 
@@ -33,15 +34,16 @@ public final class ServerAwaitScreen implements GUIScreen {
 
     private void initComponents() {
         final var ipInfo = new JLabel();
+        ipInfo.setPreferredSize(new Dimension(400, 35));
+        ipInfo.setMaximumSize(new Dimension(400, 35));
         ipInfo.setHorizontalAlignment(JLabel.CENTER);
-        ipInfo.setVerticalAlignment(JLabel.CENTER);
         ipInfo.setFont(new Font("Arial", Font.PLAIN, 16));
         ipInfo.setText("USE THE FOLLOWING IP TO CONNECT");
 
         final var ipValueInfo = new JLabel();
-        ipValueInfo.setPreferredSize(new Dimension(250, 35));
-        ipValueInfo.setMaximumSize(new Dimension(250, 35));
-        ipValueInfo.setMinimumSize(new Dimension(250, 35));
+        ipValueInfo.setPreferredSize(new Dimension(400, 35));
+        ipValueInfo.setMaximumSize(new Dimension(400, 35));
+        ipValueInfo.setHorizontalAlignment(JLabel.CENTER);
         ipValueInfo.setFont(new Font("Arial", Font.PLAIN, 40));
         ipValueInfo.setText(this.serverIP);
 
