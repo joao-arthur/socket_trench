@@ -1,7 +1,5 @@
 package com.SocketTrench.Screens;
 
-import java.awt.Component;
-
 import javax.swing.JFrame;
 
 import com.SocketTrench.GUI.GUIScreen;
@@ -24,14 +22,11 @@ public final class MatchScreen implements GUIScreen {
         frame.setTitle("Match | Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
     public void dispose() {
         frame.dispose();
-    }
-
-    public Component getScreen() {
-        return frame;
     }
 }

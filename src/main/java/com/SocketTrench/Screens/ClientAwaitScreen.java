@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class ServerAwaitScreen implements GUIScreen {
+public final class ClientAwaitScreen implements GUIScreen {
     private final JFrame frame;
     private String serverIP = "";
 
-    public ServerAwaitScreen() {
+    public ClientAwaitScreen() {
         this.frame = new JFrame();
         this.initIp();
         this.initComponents();
@@ -32,25 +32,41 @@ public final class ServerAwaitScreen implements GUIScreen {
     }
 
     private void initComponents() {
-        final var ipInfo = new JLabel();
-        ipInfo.setHorizontalAlignment(JLabel.CENTER);
-        ipInfo.setVerticalAlignment(JLabel.CENTER);
-        ipInfo.setFont(new Font("Arial", Font.PLAIN, 16));
-        ipInfo.setText("USE THE FOLLOWING IP TO CONNECT");
+        final var buttonSize = new Dimension(250, 35);
 
-        final var ipValueInfo = new JLabel();
-        ipValueInfo.setPreferredSize(new Dimension(250, 35));
-        ipValueInfo.setMaximumSize(new Dimension(250, 35));
-        ipValueInfo.setMinimumSize(new Dimension(250, 35));
-        ipValueInfo.setFont(new Font("Arial", Font.PLAIN, 40));
-        ipValueInfo.setText(this.serverIP);
+        final var createMatch = new JLabel();
+        createMatch.setHorizontalAlignment(JLabel.CENTER);
+        createMatch.setVerticalAlignment(JLabel.CENTER);
+        createMatch.setFont(new Font("Arial", Font.PLAIN, 16));
+        createMatch.setText("WRITE DOWN THE SERVER IP ADDRESS");
+
+        final var createMatch2 = new JLabel();
+        createMatch2.setHorizontalAlignment(JLabel.CENTER);
+        createMatch2.setVerticalAlignment(JLabel.CENTER);
+
+        createMatch2.setFont(new Font("Arial", Font.PLAIN, 16));
+        createMatch2.setText("ADDRESS TO CONNECT");
+
+        final var createMatch3 = new JLabel();
+        createMatch3.setHorizontalAlignment(JLabel.CENTER);
+        createMatch3.setVerticalAlignment(JLabel.CENTER);
+
+        createMatch3.setFont(new Font("Arial", Font.PLAIN, 16));
+        createMatch3.setText("TO THE MATCH");
+
+        final var connectMatchButton = new JLabel();
+        connectMatchButton.setPreferredSize(buttonSize);
+        connectMatchButton.setFont(new Font("Arial", Font.PLAIN, 40));
+        connectMatchButton.setText(this.serverIP);
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
-        content.add(ipInfo);
+        content.add(createMatch);
+        content.add(createMatch2);
+        content.add(createMatch3);
         content.add(Box.createVerticalGlue());
-        content.add(ipValueInfo);
+        content.add(connectMatchButton);
         content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
@@ -64,7 +80,7 @@ public final class ServerAwaitScreen implements GUIScreen {
 
         frame.add(container);
         frame.pack();
-        frame.setTitle("Server | Socket Trench");
+        frame.setTitle("Client | Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
