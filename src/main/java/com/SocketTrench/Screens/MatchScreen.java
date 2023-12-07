@@ -17,10 +17,9 @@ public final class MatchScreen implements GUIScreen {
     private void initComponents() {
         final var panel = new MatchPanel();
         this.frame.add(panel);
-        // panel.revalidate();
+        frame.pack();
         frame.setTitle("Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(700, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
