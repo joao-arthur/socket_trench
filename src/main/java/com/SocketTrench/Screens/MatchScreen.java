@@ -5,6 +5,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 
 import com.SocketTrench.GUI.GUIScreen;
+import com.SocketTrench.Match.MatchModel;
 
 public final class MatchScreen implements GUIScreen {
     private final JFrame frame;
@@ -15,7 +16,7 @@ public final class MatchScreen implements GUIScreen {
     }
 
     private void initComponents() {
-        final var panel = new MatchPanel();
+        final var panel = new MatchPanel(new MatchModel());
         this.frame.add(panel);
         frame.pack();
         frame.setTitle("Match | Socket Trench");

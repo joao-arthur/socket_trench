@@ -3,34 +3,47 @@ package com.SocketTrench.Screens;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 
-import com.SocketTrench.GameObject.BackgroundGameObject;
-import com.SocketTrench.GameObject.Player1GameObject;
-import com.SocketTrench.GameObject.Player2GameObject;
+import com.SocketTrench.Match.MatchModel;
 
 public final class MatchPanel extends JPanel {
-    private BackgroundGameObject background;
-    private Player1GameObject player1;
-    private Player2GameObject player2;
+    private final MatchModel matchModel;
 
-    public MatchPanel() {
-        this.background = new BackgroundGameObject();
-        this.player1 = new Player1GameObject();
-        this.player2 = new Player2GameObject();
+    public MatchPanel(MatchModel matchModel) {
+        this.matchModel = matchModel;
         this.initComponents();
     }
 
     private void initComponents() {
         setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
+        this.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent event) {
+                // .sendMessage(event.)
+            }
+
+            @Override
+            public void keyReleased(KeyEvent event) {
+                // .sendMessage(event.)
+            }
+
+        });
+        this.setFocusable(true);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         final var drawer = (Graphics2D) g;
-        drawer.drawImage(this.background.texture, this.background.sprite.x, this.background.sprite.y, this);
-        drawer.drawImage(this.player1.texture, this.player1.sprite.x, this.player1.sprite.y, this);
-        drawer.drawImage(this.player2.texture, this.player2.sprite.x, this.player2.sprite.y, this);
+        final var background = this.matchModel.background;
+        final var player1 = this.matchModel.player1;
+        final var player2 = this.matchModel.player2;
+
+        drawer.drawImage(background.texture, background.sprite.x, background.sprite.y, this);
+        drawer.drawImage(player1.texture, player1.sprite.x, player1.sprite.y, this);
+        drawer.drawImage(player2.texture, player2.sprite.x, player2.sprite.y, this);
     }
 }
