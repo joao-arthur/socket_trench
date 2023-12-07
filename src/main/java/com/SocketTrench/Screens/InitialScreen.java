@@ -49,11 +49,9 @@ public final class InitialScreen implements GUIScreen {
         content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
-        container.setLayout(new BoxLayout(container, BoxLayout.LINE_AXIS));
-        container.add(Box.createVerticalGlue());
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
         container.add(Box.createHorizontalGlue());
         container.add(content);
-        container.add(Box.createVerticalGlue());
         container.add(Box.createHorizontalGlue());
         container.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
 
