@@ -28,7 +28,7 @@ public final class InitialScreen implements GUIScreen {
         createMatch.setText("CREATE MATCH");
         createMatch.setFont(new Font("Arial", 0, 20));
         createMatch.addActionListener(event -> {
-            GUI.getInstance().goTo(new ServerAwaitScreen());
+            GUI.getInstance().goTo(new IdleServerScreen());
         });
 
         final var connectMatch = new JButton();
@@ -37,7 +37,7 @@ public final class InitialScreen implements GUIScreen {
         connectMatch.setText("CONNECT TO MATCH");
         connectMatch.setFont(new Font("Arial", 0, 20));
         connectMatch.addActionListener(event -> {
-            GUI.getInstance().goTo(new ClientAwaitScreen());
+            GUI.getInstance().goTo(new IdleClientScreen());
         });
 
         final var content = new JPanel();
