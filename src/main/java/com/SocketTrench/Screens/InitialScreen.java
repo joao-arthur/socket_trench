@@ -58,12 +58,13 @@ public final class InitialScreen implements GUIScreen {
         container.add(content);
         container.add(Box.createVerticalGlue());
         container.add(Box.createHorizontalGlue());
+        container.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
 
         frame.add(container);
+        frame.pack();
 
         frame.setTitle("Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(700, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
