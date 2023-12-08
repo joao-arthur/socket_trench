@@ -16,8 +16,8 @@ public final class Player1GameObject {
         this.texture = ImageLoader.fromPath("player1.png");
     }
 
-    public void onKeyPressed(KeyEvent event) {
-        switch (event.getKeyCode()) {
+    public void onKeyPressed(int keyCode) {
+        switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 this.force.speedX = -1;
                 break;
@@ -35,8 +35,8 @@ public final class Player1GameObject {
         }
     }
 
-    public void onKeyReleased(KeyEvent event) {
-        switch (event.getKeyCode()) {
+    public void onKeyReleased(int keyCode) {
+        switch (keyCode) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
                 this.force.speedX = -1;
@@ -48,7 +48,7 @@ public final class Player1GameObject {
         }
     }
 
-    public boolean update() {
+    public boolean onUpdate() {
         this.sprite.x += this.force.speedX;
         this.sprite.y += this.force.speedY;
 

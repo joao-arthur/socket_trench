@@ -15,7 +15,7 @@ public final class GUI {
         currentScreen = newScreen;
     }
 
-    public void disposeCurrentScreen() {
+    private void disposeCurrentScreen() {
         if (currentScreen != null) {
             currentScreen.dispose();
             currentScreen = null;
