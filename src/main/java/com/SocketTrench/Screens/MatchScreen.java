@@ -1,29 +1,22 @@
 package com.SocketTrench.Screens;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUIScreen;
-import com.SocketTrench.Match.MatchKeyPressedDispatcher;
-import com.SocketTrench.Match.MatchKeyReleasedDispatcher;
+import com.SocketTrench.Match.MatchKeyAdapter;
 
 public final class MatchScreen implements GUIScreen {
     private final JFrame frame;
     private final JPanel panel;
-    private final MatchKeyPressedDispatcher matchKeyPressedDispatcher;
-    private final MatchKeyReleasedDispatcher matchKeyReleasedDispatcher;
+    private final MatchKeyAdapter matchKeyAdapter;
 
     public MatchScreen(
             JPanel panel,
-            MatchKeyPressedDispatcher matchKeyPressedDispatcher,
-            MatchKeyReleasedDispatcher matchKeyReleasedDispatcher) {
+            MatchKeyAdapter matchKeyAdapter) {
         this.frame = new JFrame();
         this.panel = panel;
-        this.matchKeyPressedDispatcher = matchKeyPressedDispatcher;
-        this.matchKeyReleasedDispatcher = matchKeyReleasedDispatcher;
+        this.matchKeyAdapter = matchKeyAdapter;
         this.initComponents();
     }
 
@@ -35,17 +28,7 @@ public final class MatchScreen implements GUIScreen {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent event) {
-                matchKeyPressedDispatcher.dispatch(event.getKeyCode());
-            }
-
-            @Override
-            public void keyReleased(KeyEvent event) {
-                matchKeyReleasedDispatcher.dispatch(event.getKeyCode());
-            }
-        });
+        frame.addKeyListener(matchKeyAdapter);
     }
 
     @Override

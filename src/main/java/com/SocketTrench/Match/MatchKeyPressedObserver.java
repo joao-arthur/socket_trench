@@ -11,6 +11,6 @@ public class MatchKeyPressedObserver implements Observer<Integer> {
 
     @Override
     public void handle(Integer event) {
-        matchModel.player1.onKeyPressed(event);
+        // matchModel.player1.onKeyPressed(event);
     }
 }
