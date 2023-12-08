@@ -22,7 +22,7 @@ public final class InitialScreen implements GUIScreen {
         this.initComponents();
     }
 
-    private void initComponents() {
+    private final void initComponents() {
         final var createMatch = new JButton();
         createMatch.setPreferredSize(new Dimension(250, 50));
         createMatch.setMaximumSize(new Dimension(250, 50));
@@ -66,7 +66,7 @@ public final class InitialScreen implements GUIScreen {
     }
 
     @Override
-    public void dispose() {
+    public final void dispose() {
         frame.dispose();
     }
 }

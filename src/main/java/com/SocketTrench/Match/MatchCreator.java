@@ -9,23 +9,16 @@ public final class MatchCreator {
         final var matchModel = new MatchModel();
         final var matchKeyPressedDispatcher = new MatchKeyPressedDispatcher();
         final var matchKeyReleasedDispatcher = new MatchKeyReleasedDispatcher();
-
         final var matchKeyPressedObserver = new MatchKeyPressedObserver(matchModel);
         matchKeyPressedDispatcher.register(matchKeyPressedObserver);
         final var matchKeyReleasedObserver = new MatchKeyReleasedObserver(matchModel);
         matchKeyReleasedDispatcher.register(matchKeyReleasedObserver);
-
         final var matchKeyAdapter = new MatchKeyAdapter(matchModel);
-
         final var matchRenderDispatcher = new MatchRenderDispatcher();
-
         final var matchManager = new MatchManager(matchModel, matchRenderDispatcher);
-
         final var matchPanel = new MatchPanel(matchModel);
         matchRenderDispatcher.register(matchPanel);
-
         final var matchScreen = new MatchScreen(matchPanel, matchKeyAdapter);
-
         GUI.getInstance().goTo(matchScreen);
         matchManager.init();
     }

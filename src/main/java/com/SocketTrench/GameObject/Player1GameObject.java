@@ -16,9 +16,28 @@ public final class Player1GameObject {
     }
 
     public boolean onUpdate() {
-        this.sprite.x += this.force.speedX;
-        this.sprite.y += this.force.speedY;
+        final var oldX = this.sprite.x;
+        final var oldY = this.sprite.y;
 
-        return this.force.speedX != 0 || this.force.speedY != 0;
+        var newX = this.sprite.x + this.force.speedX;
+        var newY = this.sprite.y + this.force.speedY;
+
+        if (newX < 0) {
+            newX = 0;
+        }
+        if (newX > 200 - this.sprite.width) {
+            newX = 200 - this.sprite.width;
+        }
+        if (newY < 0) {
+            newY = 0;
+        }
+        if (newY > 500 - this.sprite.height) {
+            newY = 500 - this.sprite.height;
+        }
+
+        this.sprite.x = newX;
+        this.sprite.y = newY;
+
+        return this.sprite.x != oldX && this.sprite.y != oldY;
     }
 }
