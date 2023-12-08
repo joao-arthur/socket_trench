@@ -66,6 +66,7 @@ public final class GameOverScreen implements GUIScreen {
         frame.setVisible(true);
     }
 
+    @Override
     public void dispose() {
         this.frame.dispose();
     }

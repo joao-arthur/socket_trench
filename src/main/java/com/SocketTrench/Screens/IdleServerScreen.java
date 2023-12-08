@@ -59,6 +59,7 @@ public final class IdleServerScreen implements GUIScreen {
         frame.setVisible(true);
     }
 
+    @Override
     public void dispose() {
         this.frame.dispose();
     }

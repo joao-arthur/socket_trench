@@ -6,15 +6,17 @@ import java.util.List;
 import com.SocketTrench.Events.Dispatcher;
 import com.SocketTrench.Events.Observer;
 
-public final class MatchKeyDispatcher implements Dispatcher {
-    public final List<Observer> observers = new LinkedList<Observer>();
+public final class MatchKeyReleasedDispatcher implements Dispatcher<Integer> {
+    public final List<Observer<Integer>> observers = new LinkedList<Observer<Integer>>();
 
-    public void dispatch(String event) {
+    @Override
+    public void dispatch(Integer event) {
         for (final var observer : observers)
             observer.handle(event);
     }
 
-    public void register(Observer observer) {
+    @Override
+    public void register(Observer<Integer> observer) {
         observers.add(observer);
     }
 }

@@ -19,16 +19,16 @@ public final class Player1GameObject {
     public void onKeyPressed(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
-                this.force.speedX = -1;
+                this.force.speedX = -3;
                 break;
             case KeyEvent.VK_RIGHT:
-                this.force.speedX = 1;
+                this.force.speedX = 3;
                 break;
             case KeyEvent.VK_UP:
-                this.force.speedY = -1;
+                this.force.speedY = -3;
                 break;
             case KeyEvent.VK_DOWN:
-                this.force.speedY = 1;
+                this.force.speedY = 3;
                 break;
             case KeyEvent.VK_SPACE:
                 break;
@@ -39,7 +39,7 @@ public final class Player1GameObject {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
-                this.force.speedX = -1;
+                this.force.speedX = 0;
                 break;
             case KeyEvent.VK_UP:
             case KeyEvent.VK_DOWN:

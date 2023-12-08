@@ -1,6 +1,6 @@
 package com.SocketTrench.Events;
 
-public interface Dispatcher {
-    public void dispatch(String event);
-    public void register(Observer observer);
+public interface Dispatcher<Event> {
+    public void dispatch(Event event);
+    public void register(Observer<Event> observer);
 }

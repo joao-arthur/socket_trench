@@ -46,7 +46,7 @@ public final class IdleClientScreen implements GUIScreen {
         confirm.setText("CONFIRM");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            GUI.getInstance().goTo(new MatchScreen());
+            // GUI.getInstance().goTo(new MatchScreen());
         });
 
         final var content = new JPanel();
@@ -75,6 +75,7 @@ public final class IdleClientScreen implements GUIScreen {
         frame.setVisible(true);
     }
 
+    @Override
     public void dispose() {
         this.frame.dispose();
     }
