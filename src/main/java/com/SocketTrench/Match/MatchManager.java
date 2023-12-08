@@ -9,12 +9,15 @@ public final class MatchManager {
     private MatchModel matchModel;
     private MatchRenderDispatcher matchRenderDispatcher;
 
-    public MatchManager(MatchModel matchModel, MatchRenderDispatcher matchRenderDispatcher) {
+    public MatchManager(
+        final MatchModel matchModel,
+        final MatchRenderDispatcher matchRenderDispatcher
+    ) {
         this.matchModel = matchModel;
         this.matchRenderDispatcher = matchRenderDispatcher;
     }
 
-    public void init() {
+    public final void init() {
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         final Runnable task = () -> {
             this.onUpdate();
@@ -22,7 +25,7 @@ public final class MatchManager {
         scheduler.scheduleAtFixedRate(task, 0, 1000 / FPS, TimeUnit.MILLISECONDS);
     }
 
-    public void onUpdate() {
+    public final void onUpdate() {
         final var player1HasChanged = this.matchModel.player1.onUpdate();
         for (var shoot : this.matchModel.player1Shoots) {
             shoot.onUpdate();

@@ -20,7 +20,7 @@ public final class IdleServerScreen implements GUIScreen {
         this.initComponents();
     }
 
-    private void initComponents() {
+    private final void initComponents() {
         final var info = new JLabel();
         info.setPreferredSize(new Dimension(400, 35));
         info.setMaximumSize(new Dimension(400, 35));
@@ -60,7 +60,7 @@ public final class IdleServerScreen implements GUIScreen {
     }
 
     @Override
-    public void dispose() {
+    public final void dispose() {
         this.frame.dispose();
     }
 }

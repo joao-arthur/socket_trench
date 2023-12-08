@@ -10,13 +10,13 @@ public final class MatchRenderDispatcher implements Dispatcher<String> {
     public final List<Observer<String>> observers = new LinkedList<Observer<String>>();
 
     @Override
-    public void dispatch(String event) {
+    public final void dispatch(final String event) {
         for (final var observer : observers)
             observer.handle(event);
     }
 
     @Override
-    public void register(Observer<String> observer) {
+    public final void register(final Observer<String> observer) {
         observers.add(observer);
     }
 }

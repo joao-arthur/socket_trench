@@ -10,13 +10,13 @@ public final class MatchKeyReleasedDispatcher implements Dispatcher<Integer> {
     public final List<Observer<Integer>> observers = new LinkedList<Observer<Integer>>();
 
     @Override
-    public void dispatch(Integer event) {
+    public final void dispatch(final Integer event) {
         for (final var observer : observers)
             observer.handle(event);
     }
 
     @Override
-    public void register(Observer<Integer> observer) {
+    public final void register(final Observer<Integer> observer) {
         observers.add(observer);
     }
 }

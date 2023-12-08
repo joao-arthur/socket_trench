@@ -10,15 +10,16 @@ public final class ShootGameObject {
     public Image texture;
 
     public ShootGameObject(
-            int x,
-            int y,
-            int speedX) {
+        int x,
+        int y,
+        int speedX
+    ) {
         this.sprite = new Sprite(58, 30, x, y);
         this.force = new Force(speedX, 0);
         this.texture = ImageLoader.fromPath("shoot.png");
     }
 
-    public boolean onUpdate() {
+    public final boolean onUpdate() {
         this.sprite.x += this.force.speedX;
         this.sprite.y += this.force.speedY;
 

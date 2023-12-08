@@ -15,7 +15,7 @@ public final class Player1GameObject {
         this.texture = ImageLoader.fromPath("player1.png");
     }
 
-    public boolean onUpdate() {
+    public final boolean onUpdate() {
         final var oldX = this.sprite.x;
         final var oldY = this.sprite.y;
 

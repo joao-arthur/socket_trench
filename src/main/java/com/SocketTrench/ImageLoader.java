@@ -6,7 +6,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public final class ImageLoader {
-    public static Image fromPath(String path) {
+    public static Image fromPath(final String path) {
         final URL url = ImageLoader.class.getClassLoader().getResource(path);
         return new ImageIcon(url).getImage();
     }

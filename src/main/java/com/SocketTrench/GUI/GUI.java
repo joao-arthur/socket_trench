@@ -10,12 +10,12 @@ public final class GUI {
         return instance;
     }
 
-    public void goTo(GUIScreen newScreen) {
+    public final void goTo(final GUIScreen newScreen) {
         disposeCurrentScreen();
         currentScreen = newScreen;
     }
 
-    private void disposeCurrentScreen() {
+    private final void disposeCurrentScreen() {
         if (currentScreen != null) {
             currentScreen.dispose();
             currentScreen = null;

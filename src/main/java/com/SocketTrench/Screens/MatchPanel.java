@@ -12,17 +12,17 @@ import com.SocketTrench.Match.MatchModel;
 public final class MatchPanel extends JPanel implements Observer<String> {
     private final MatchModel matchModel;
 
-    public MatchPanel(MatchModel matchModel) {
+    public MatchPanel(final MatchModel matchModel) {
         this.matchModel = matchModel;
         this.initComponents();
     }
 
-    private void initComponents() {
+    private final void initComponents() {
         setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected final void paintComponent(Graphics g) {
         final var drawer = (Graphics2D) g;
         final var background = this.matchModel.background;
         final var player1 = this.matchModel.player1;
@@ -40,7 +40,7 @@ public final class MatchPanel extends JPanel implements Observer<String> {
         }
     }
 
-    public void handle(String event) {
+    public final void handle(String event) {
         this.repaint();
     }
 }

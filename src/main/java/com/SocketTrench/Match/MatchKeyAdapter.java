@@ -17,11 +17,11 @@ public final class MatchKeyAdapter implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent event) {
+    public final void keyTyped(KeyEvent event) {
     }
 
     @Override
-    public void keyPressed(KeyEvent event) {
+    public final void keyPressed(KeyEvent event) {
         final Integer keyCode = event.getKeyCode();
         if (this.keys.contains(keyCode)) {
             return;
@@ -50,7 +50,7 @@ public final class MatchKeyAdapter implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent event) {
+    public final void keyReleased(KeyEvent event) {
         final Integer keyCode = event.getKeyCode();
         this.keys.remove(keyCode);
         switch (keyCode) {

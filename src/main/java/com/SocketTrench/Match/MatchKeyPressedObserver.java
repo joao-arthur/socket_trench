@@ -5,12 +5,12 @@ import com.SocketTrench.Events.Observer;
 public class MatchKeyPressedObserver implements Observer<Integer> {
     private final MatchModel matchModel;
 
-    public MatchKeyPressedObserver(MatchModel matchModel) {
+    public MatchKeyPressedObserver(final MatchModel matchModel) {
         this.matchModel = matchModel;
     }
 
     @Override
-    public void handle(Integer event) {
+    public final void handle(final Integer event) {
         // matchModel.player1.onKeyPressed(event);
     }
 }
