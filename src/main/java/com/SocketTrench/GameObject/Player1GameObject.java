@@ -25,8 +25,8 @@ public final class Player1GameObject {
         if (newX < 0) {
             newX = 0;
         }
-        if (newX > 200 - this.sprite.width) {
-            newX = 200 - this.sprite.width;
+        if (newX > 160 - this.sprite.width) {
+            newX = 160 - this.sprite.width;
         }
         if (newY < 0) {
             newY = 0;
