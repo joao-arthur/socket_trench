@@ -26,20 +26,13 @@ public final class MatchManager {
     }
 
     public final void onUpdate() {
-        final var player1HasChanged = this.matchModel.player1.onUpdate();
+        this.matchModel.player1.onUpdate();
         for (var shoot : this.matchModel.player1Shoots) {
             shoot.onUpdate();
         }
         for (var shoot : this.matchModel.player2Shoots) {
             shoot.onUpdate();
         }
-        final var shootsPlayer1HasChanged = this.matchModel.player1Shoots.size() > 0;
-        final var shootsPlayer2HasChanged = this.matchModel.player2Shoots.size() > 0;
-        final var hasChanged = player1HasChanged ||
-                shootsPlayer1HasChanged ||
-                shootsPlayer2HasChanged;
-        if (hasChanged) {
             matchRenderDispatcher.dispatch("RENDER");
-        }
     }
 }

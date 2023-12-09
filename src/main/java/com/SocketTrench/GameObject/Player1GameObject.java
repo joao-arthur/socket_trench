@@ -3,41 +3,41 @@ package com.SocketTrench.GameObject;
 import java.awt.Image;
 
 import com.SocketTrench.ImageLoader;
+import com.SocketTrench.Engine.Body;
+import com.SocketTrench.Engine.Force;
 
 public final class Player1GameObject {
-    public Sprite sprite;
-    public Force force;
-    public Image texture;
+    public final Body body;
+    public final Force force;
+    public final Image texture;
 
     public Player1GameObject() {
-        this.sprite = new Sprite(58, 30, 0, 100);
+        this.body = new Body(58, 30, 0, 100);
         this.force = new Force(0, 0);
         this.texture = ImageLoader.fromPath("player1.png");
     }
 
-    public final boolean onUpdate() {
-        final var oldX = this.sprite.x;
-        final var oldY = this.sprite.y;
+    public final void onUpdate() {
+        final var oldX = this.body.x;
+        final var oldY = this.body.y;
 
-        var newX = this.sprite.x + this.force.speedX;
-        var newY = this.sprite.y + this.force.speedY;
+        var newX = this.body.x + this.force.x;
+        var newY = this.body.y + this.force.y;
 
         if (newX < 0) {
             newX = 0;
         }
-        if (newX > 160 - this.sprite.width) {
-            newX = 160 - this.sprite.width;
+        if (newX > 160 - this.body.width) {
+            newX = 160 - this.body.width;
         }
         if (newY < 0) {
             newY = 0;
         }
-        if (newY > 500 - this.sprite.height) {
-            newY = 500 - this.sprite.height;
+        if (newY > 500 - this.body.height) {
+            newY = 500 - this.body.height;
         }
 
-        this.sprite.x = newX;
-        this.sprite.y = newY;
-
-        return this.sprite.x != oldX && this.sprite.y != oldY;
+        this.body.x = newX;
+        this.body.y = newY;
     }
 }

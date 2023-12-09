@@ -28,23 +28,25 @@ public final class MatchKeyAdapter implements KeyListener {
         }
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
-                this.matchModel.player1.force.speedX = -4;
+                this.matchModel.player1.force.x = -4;
                 break;
             case KeyEvent.VK_RIGHT:
-                this.matchModel.player1.force.speedX = 4;
+                this.matchModel.player1.force.x = 4;
                 break;
             case KeyEvent.VK_UP:
-                this.matchModel.player1.force.speedY = -4;
+                this.matchModel.player1.force.y = -4;
                 break;
             case KeyEvent.VK_DOWN:
-                this.matchModel.player1.force.speedY = 4;
+                this.matchModel.player1.force.y = 4;
                 break;
             case KeyEvent.VK_SPACE:
                 this.matchModel.player1Shoots.add(
-                        new ShootGameObject(
-                                this.matchModel.player1.sprite.x + this.matchModel.player1.sprite.width,
-                                this.matchModel.player1.sprite.y + this.matchModel.player1.sprite.height / 2 - 1,
-                                10));
+                    new ShootGameObject(
+                        this.matchModel.player1.body.x + this.matchModel.player1.body.width,
+                        this.matchModel.player1.body.y + this.matchModel.player1.body.height / 2 - 1,
+                        10
+                    )
+                );
                 break;
         }
     }
@@ -56,11 +58,11 @@ public final class MatchKeyAdapter implements KeyListener {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
-                this.matchModel.player1.force.speedX = 0;
+                this.matchModel.player1.force.x = 0;
                 break;
             case KeyEvent.VK_UP:
             case KeyEvent.VK_DOWN:
-                this.matchModel.player1.force.speedY = 0;
+                this.matchModel.player1.force.y = 0;
                 break;
         }
     }

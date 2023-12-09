@@ -1,16 +1,16 @@
-package com.SocketTrench.GameObject;
+package com.SocketTrench.Engine;
 
-public final class Sprite {
+public final class Body {
     public int width;
     public int height;
     public int x;
     public int y;
 
-    public Sprite(
-        int width,
-        int height,
-        int x,
-        int y
+    public Body(
+        final int width,
+        final int height,
+        final int x,
+        final int y
     ) {
         this.width = width;
         this.height = height;
