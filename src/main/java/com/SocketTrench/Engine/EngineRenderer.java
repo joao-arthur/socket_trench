@@ -11,13 +11,11 @@ public final class EngineRenderer {
     private final List<GameObject> gameObjects;
     private final BufferedImage buffer;
 
-    public EngineRenderer(
-        final List<GameObject> gameObjects
-    ) {
+    public EngineRenderer(final List<GameObject> gameObjects) {
         this.gameObjects = gameObjects;
         this.buffer = new BufferedImage(Screen.WIDTH, Screen.HEIGHT, BufferedImage.TYPE_INT_RGB);
     }
-    
+
     public final void render(Graphics graphics) {
         final Graphics2D bufferGraphics = buffer.createGraphics();
         for (var gameObject : this.gameObjects) {

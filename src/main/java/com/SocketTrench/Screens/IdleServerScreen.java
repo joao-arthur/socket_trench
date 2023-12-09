@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class IdleServerScreen implements GUIScreen {
+final class IdleServerScreen implements GUIScreen {
     private final JFrame frame;
 
     public IdleServerScreen() {

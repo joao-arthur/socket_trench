@@ -10,7 +10,7 @@ import com.SocketTrench.Engine.GameObject;
 import com.SocketTrench.Engine.Square;
 import com.SocketTrench.Screens.Screen;
 
-public final class Player1GameObject implements GameObject {
+final class Player1GameObject implements GameObject {
     public final Body body;
     public final Image texture;
     public final Force force;

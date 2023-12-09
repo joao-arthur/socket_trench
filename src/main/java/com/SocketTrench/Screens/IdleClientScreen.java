@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class IdleClientScreen implements GUIScreen {
+final class IdleClientScreen implements GUIScreen {
     private final JFrame frame;
 
     public IdleClientScreen() {

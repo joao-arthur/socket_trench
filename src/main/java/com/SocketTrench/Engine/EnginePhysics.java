@@ -1,6 +1,6 @@
 package com.SocketTrench.Engine;
 
-public class EnginePhysics {
+final class EnginePhysics {
     public static void apply(GameObject gameObject) {
         final Body body = gameObject.getBody();
         final Force force = gameObject.getForce();

@@ -13,8 +13,9 @@ public final class MatchScreen implements GUIScreen {
     private final KeyListener keyListener;
 
     public MatchScreen(
-            final JPanel panel,
-            final KeyListener keyListener) {
+        final JPanel panel,
+        final KeyListener keyListener
+    ) {
         this.frame = new JFrame();
         this.panel = panel;
         this.keyListener = keyListener;

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class EngineKeyAdapter implements KeyListener {
+public final class EngineKeyAdapter implements KeyListener {
     private final List<GameObject> gameObjects;
     private final Set<Integer> keys;
 
@@ -16,11 +16,11 @@ public class EngineKeyAdapter implements KeyListener {
     }
 
     @Override
-    public final void keyTyped(KeyEvent event) {
+    public final void keyTyped(final KeyEvent event) {
     }
 
     @Override
-    public final void keyPressed(KeyEvent event) {
+    public final void keyPressed(final KeyEvent event) {
         final Integer keyCode = event.getKeyCode();
         if (this.keys.contains(keyCode)) {
             return;
@@ -31,7 +31,7 @@ public class EngineKeyAdapter implements KeyListener {
     }
 
     @Override
-    public final void keyReleased(KeyEvent event) {
+    public final void keyReleased(final KeyEvent event) {
         final Integer keyCode = event.getKeyCode();
         this.keys.remove(keyCode);
         for (final var gameObject : this.gameObjects) {

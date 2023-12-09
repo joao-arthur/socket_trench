@@ -5,14 +5,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class EngineManager {
+public final class EngineManager {
     private static final int FPS = 30;
     private final List<GameObject> gameObjects;
-    private EngineRenderDispatcher matchRenderDispatcher;
+    private final EngineRenderDispatcher matchRenderDispatcher;
 
     public EngineManager(
-            final List<GameObject> gameObjects,
-            final EngineRenderDispatcher matchRenderDispatcher) {
+        final List<GameObject> gameObjects,
+        final EngineRenderDispatcher matchRenderDispatcher
+    ) {
         this.gameObjects = gameObjects;
         this.matchRenderDispatcher = matchRenderDispatcher;
 

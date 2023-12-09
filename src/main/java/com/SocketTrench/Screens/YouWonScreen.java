@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class YouWonScreen implements GUIScreen {
+final class YouWonScreen implements GUIScreen {
     private final JFrame frame;
 
     public YouWonScreen() {

@@ -21,12 +21,12 @@ public final class MatchPanel extends JPanel implements Observer<String> {
     }
 
     @Override
-    protected final void paintComponent(Graphics graphics) {
+    protected final void paintComponent(final Graphics graphics) {
         super.paintComponent(graphics);
         this.engineRenderer.render(graphics);
     }
 
-    public final void handle(String event) {
+    public final void handle(final String event) {
         this.repaint();
     }
 }

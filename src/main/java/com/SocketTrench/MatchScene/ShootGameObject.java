@@ -8,15 +8,16 @@ import com.SocketTrench.Engine.Force;
 import com.SocketTrench.Engine.GameObject;
 import com.SocketTrench.Engine.Square;
 
-public final class ShootGameObject implements GameObject {
+final class ShootGameObject implements GameObject {
     public final Body body;
     public final Image texture;
     public final Force force;
 
     public ShootGameObject(
-            final int x,
-            final int y,
-            final int speedX) {
+        final int x,
+        final int y,
+        final int speedX
+    ) {
         this.body = new Body(58, 30, x, y);
         this.force = new Force(speedX, 0);
         this.texture = ImageLoader.fromPath("shoot.png");
