@@ -2,6 +2,10 @@ package com.SocketTrench.Engine;
 
 import java.awt.Image;
 
+import com.SocketTrench.Engine.Struct.BoxDim;
+import com.SocketTrench.Engine.Struct.BoxPos;
+import com.SocketTrench.Engine.Struct.Point;
+
 public abstract class DefaultGameObject implements GameObject {
     public BoxDim body = null;
     public Image texture = null;

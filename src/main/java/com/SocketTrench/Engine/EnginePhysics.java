@@ -1,5 +1,9 @@
 package com.SocketTrench.Engine;
 
+import com.SocketTrench.Engine.Struct.BoxDim;
+import com.SocketTrench.Engine.Struct.BoxPos;
+import com.SocketTrench.Engine.Struct.Point;
+
 final class EnginePhysics {
     public static void apply(GameObject gameObject) {
         final BoxDim body = gameObject.getBody();

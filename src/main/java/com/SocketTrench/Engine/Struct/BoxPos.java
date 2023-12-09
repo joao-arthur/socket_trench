@@ -1,4 +1,4 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Struct;
 
 public final class BoxPos {
     public int x1;

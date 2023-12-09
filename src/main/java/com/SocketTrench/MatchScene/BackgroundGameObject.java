@@ -1,8 +1,8 @@
 package com.SocketTrench.MatchScene;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.DefaultGameObject;
+import com.SocketTrench.Engine.Struct.BoxDim;
 import com.SocketTrench.Screens.Screen;
 
 final class BackgroundGameObject extends DefaultGameObject {

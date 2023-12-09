@@ -1,9 +1,9 @@
 package com.SocketTrench.MatchScene;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.BoxDim;
-import com.SocketTrench.Engine.Point;
 import com.SocketTrench.Engine.DefaultGameObject;
+import com.SocketTrench.Engine.Struct.BoxDim;
+import com.SocketTrench.Engine.Struct.Point;
 
 final class ShootGameObject extends DefaultGameObject {
     public ShootGameObject(

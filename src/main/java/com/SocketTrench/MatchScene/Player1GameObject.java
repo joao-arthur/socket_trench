@@ -3,11 +3,11 @@ package com.SocketTrench.MatchScene;
 import java.awt.event.KeyEvent;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.BoxDim;
-import com.SocketTrench.Engine.BoxPos;
-import com.SocketTrench.Engine.Point;
 import com.SocketTrench.Screens.Screen;
 import com.SocketTrench.Engine.DefaultGameObject;
+import com.SocketTrench.Engine.Struct.BoxDim;
+import com.SocketTrench.Engine.Struct.BoxPos;
+import com.SocketTrench.Engine.Struct.Point;
 
 final class Player1GameObject extends DefaultGameObject {
     public Player1GameObject() {
