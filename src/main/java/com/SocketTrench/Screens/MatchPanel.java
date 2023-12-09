@@ -37,10 +37,10 @@ public final class MatchPanel extends JPanel implements Observer<String> {
         bufferGraphics.drawImage(background.texture, background.body.x, background.body.y, null);
         bufferGraphics.drawImage(player1.texture, player1.body.x, player1.body.y, null);
         bufferGraphics.drawImage(player2.texture, player2.body.x, player2.body.y, null);
-        for (var shoot : player1Shoots) {
+        for (final var shoot : player1Shoots) {
             bufferGraphics.drawImage(shoot.texture, shoot.body.x, shoot.body.y, null);
         }
-        for (var shoot : player2Shoots) {
+        for (final var shoot : player2Shoots) {
             bufferGraphics.drawImage(shoot.texture, shoot.body.x, shoot.body.y, null);
         }
 

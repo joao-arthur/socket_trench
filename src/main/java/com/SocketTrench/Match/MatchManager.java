@@ -27,10 +27,10 @@ public final class MatchManager {
 
     public final void onUpdate() {
         this.matchModel.player1.onUpdate();
-        for (var shoot : this.matchModel.player1Shoots) {
+        for (final var shoot : this.matchModel.player1Shoots) {
             shoot.onUpdate();
         }
-        for (var shoot : this.matchModel.player2Shoots) {
+        for (final var shoot : this.matchModel.player2Shoots) {
             shoot.onUpdate();
         }
             matchRenderDispatcher.dispatch("RENDER");

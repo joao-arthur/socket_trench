@@ -18,17 +18,14 @@ public final class Player1GameObject {
     }
 
     public final void onUpdate() {
-        final var oldX = this.body.x;
-        final var oldY = this.body.y;
-
         var newX = this.body.x + this.force.x;
         var newY = this.body.y + this.force.y;
 
         if (newX < 0) {
             newX = 0;
         }
-        if (newX > 160 - this.body.width) {
-            newX = 160 - this.body.width;
+        if (newX > 158 - this.body.width) {
+            newX = 158 - this.body.width;
         }
         if (newY < 0) {
             newY = 0;
