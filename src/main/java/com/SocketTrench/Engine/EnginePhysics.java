@@ -3,7 +3,7 @@ package com.SocketTrench.Engine;
 final class EnginePhysics {
     public static void apply(GameObject gameObject) {
         final BoxDim body = gameObject.getBody();
-        final Force force = gameObject.getForce();
+        final Point force = gameObject.getForce();
         final BoxPos bounds = gameObject.getBounds();
         if (force == null){
             return;

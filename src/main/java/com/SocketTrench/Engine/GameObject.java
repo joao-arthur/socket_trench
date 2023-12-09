@@ -5,7 +5,7 @@ import java.awt.Image;
 public interface GameObject {
     public BoxDim getBody();
     public Image getTexture();
-    public Force getForce();
+    public Point getForce();
     public BoxPos getBounds();
     public void onUpdate();
     public void onKeyPressed(final int keyCode);

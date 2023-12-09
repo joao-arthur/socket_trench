@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import com.SocketTrench.ImageLoader;
 import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.BoxPos;
-import com.SocketTrench.Engine.Force;
+import com.SocketTrench.Engine.Point;
 import com.SocketTrench.Screens.Screen;
 import com.SocketTrench.Engine.DefaultGameObject;
 
@@ -13,7 +13,7 @@ final class Player1GameObject extends DefaultGameObject {
     public Player1GameObject() {
         this.body = new BoxDim(0, 100, 58, 30);
         this.texture = ImageLoader.fromPath("player1.png");
-        this.force = new Force(0, 0);
+        this.force = new Point(0, 0);
         this.bounds = new BoxPos(0, 0, 158, Screen.HEIGHT);
     }
 

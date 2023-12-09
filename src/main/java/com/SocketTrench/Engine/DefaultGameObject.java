@@ -5,7 +5,7 @@ import java.awt.Image;
 public abstract class DefaultGameObject implements GameObject {
     public BoxDim body = null;
     public Image texture = null;
-    public Force force = null;
+    public Point force = null;
     public BoxPos bounds = null;
 
     @Override
@@ -19,7 +19,7 @@ public abstract class DefaultGameObject implements GameObject {
     }
 
     @Override
-    public final Force getForce() {
+    public final Point getForce() {
         return this.force;
     }
 

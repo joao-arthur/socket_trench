@@ -1,10 +1,10 @@
 package com.SocketTrench.Engine;
 
-public final class Force {
+public final class Point {
     public int x;
     public int y;
 
-    public Force(
+    public Point(
         final int x,
         final int y
     ) {
@@ -15,7 +15,7 @@ public final class Force {
     @Override
     public final String toString() {
         return new StringBuilder()
-            .append("Force { x: ")
+            .append("Point { x: ")
             .append(this.x)
             .append(", y: ")
             .append(this.y)
