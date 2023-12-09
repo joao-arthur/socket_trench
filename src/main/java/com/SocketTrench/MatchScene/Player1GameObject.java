@@ -1,50 +1,19 @@
 package com.SocketTrench.MatchScene;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 
 import com.SocketTrench.ImageLoader;
 import com.SocketTrench.Engine.BoxDim;
-import com.SocketTrench.Engine.Force;
-import com.SocketTrench.Engine.GameObject;
 import com.SocketTrench.Engine.BoxPos;
-import com.SocketTrench.Screens.Screen;
+import com.SocketTrench.Engine.Force;
+import com.SocketTrench.Engine.DefaultGameObject;
 
-final class Player1GameObject implements GameObject {
-    public final BoxDim body;
-    public final Image texture;
-    public final Force force;
-    public final BoxPos bounds;
-
+final class Player1GameObject extends DefaultGameObject {
     public Player1GameObject() {
         this.body = new BoxDim(0, 100, 58, 30);
         this.texture = ImageLoader.fromPath("player1.png");
         this.force = new Force(0, 0);
-        this.bounds = new BoxPos(0, 0, 158 - 58, Screen.HEIGHT - 30);
-    }
-
-    @Override
-    public final BoxDim getBody() {
-        return this.body;
-    }
-
-    @Override
-    public final Image getTexture() {
-        return this.texture;
-    }
-
-    @Override
-    public final Force getForce() {
-        return this.force;
-    }
-
-    @Override
-    public final BoxPos getBounds() {
-        return this.bounds;
-    }
-
-    @Override
-    public final void onUpdate() {
+        //this.bounds = new BoxPos(0, 0, 158 - 58, Screen.HEIGHT - 30);
     }
 
     @Override
