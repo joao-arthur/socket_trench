@@ -1,4 +1,4 @@
-package com.SocketTrench.Scenes.Match;
+package com.SocketTrench.MatchScene;
 
 import java.awt.Image;
 
@@ -9,17 +9,13 @@ import com.SocketTrench.Engine.GameObject;
 import com.SocketTrench.Engine.Square;
 import com.SocketTrench.Screens.Screen;
 
-public final class Player2GameObject implements GameObject {
+public final class BackgroundGameObject implements GameObject {
     public final Body body;
     public final Image texture;
-    public final Force force;
-    public final Square bounds;
 
-    public Player2GameObject() {
-        this.body = new Body(58, 30, Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30);
-        this.texture = ImageLoader.fromPath("player2.png");
-        this.force = new Force(0, 0);
-        this.bounds = new Square(Screen.WIDTH - 158, Screen.WIDTH, 0, Screen.HEIGHT - 30);
+    public BackgroundGameObject() {
+        this.body = new Body(Screen.WIDTH, Screen.HEIGHT, 0, 0);
+        this.texture = ImageLoader.fromPath("background.png");
     }
 
     @Override
@@ -34,12 +30,12 @@ public final class Player2GameObject implements GameObject {
 
     @Override
     public final Force getForce() {
-        return this.force;
+        return null;
     }
 
     @Override
     public final Square getBounds() {
-        return this.bounds;
+        return null;
     }
 
     @Override

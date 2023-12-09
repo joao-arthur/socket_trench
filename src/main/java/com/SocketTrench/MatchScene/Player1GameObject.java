@@ -1,4 +1,4 @@
-package com.SocketTrench.Scenes.Match;
+package com.SocketTrench.MatchScene;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;

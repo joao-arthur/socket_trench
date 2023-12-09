@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
-import com.SocketTrench.Match.MatchCreator;
+import com.SocketTrench.MatchScene.SceneCreator;
 
 public final class InitialScreen implements GUIScreen {
     private final JFrame frame;
@@ -29,7 +29,7 @@ public final class InitialScreen implements GUIScreen {
         createMatch.setText("CREATE MATCH");
         createMatch.setFont(new Font("Arial", 0, 20));
         createMatch.addActionListener(event -> {
-            MatchCreator.create();
+            SceneCreator.create();
         });
 
         final var connectMatch = new JButton();
