@@ -23,20 +23,21 @@ public final class MatchPanel extends JPanel implements Observer<String> {
 
     @Override
     protected final void paintComponent(Graphics g) {
+        super.paintComponent(g);
         final var drawer = (Graphics2D) g;
         final var background = this.matchModel.background;
         final var player1 = this.matchModel.player1;
         final var player2 = this.matchModel.player2;
         final var player1Shoots = this.matchModel.player1Shoots;
         final var player2Shoots = this.matchModel.player2Shoots;
-        drawer.drawImage(background.texture, background.sprite.x, background.sprite.y, this);
-        drawer.drawImage(player1.texture, player1.sprite.x, player1.sprite.y, this);
-        drawer.drawImage(player2.texture, player2.sprite.x, player2.sprite.y, this);
+        drawer.drawImage(background.texture, background.sprite.x, background.sprite.y, null);
+        drawer.drawImage(player1.texture, player1.sprite.x, player1.sprite.y, null);
+        drawer.drawImage(player2.texture, player2.sprite.x, player2.sprite.y, null);
         for (var shoot : player1Shoots) {
-            drawer.drawImage(shoot.texture, shoot.sprite.x, shoot.sprite.y, this);
+            drawer.drawImage(shoot.texture, shoot.sprite.x, shoot.sprite.y, null);
         }
         for (var shoot : player2Shoots) {
-            drawer.drawImage(shoot.texture, shoot.sprite.x, shoot.sprite.y, this);
+            drawer.drawImage(shoot.texture, shoot.sprite.x, shoot.sprite.y, null);
         }
     }
 
