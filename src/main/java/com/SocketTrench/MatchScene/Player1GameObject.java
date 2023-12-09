@@ -6,6 +6,7 @@ import com.SocketTrench.ImageLoader;
 import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.BoxPos;
 import com.SocketTrench.Engine.Force;
+import com.SocketTrench.Screens.Screen;
 import com.SocketTrench.Engine.DefaultGameObject;
 
 final class Player1GameObject extends DefaultGameObject {
@@ -13,7 +14,7 @@ final class Player1GameObject extends DefaultGameObject {
         this.body = new BoxDim(0, 100, 58, 30);
         this.texture = ImageLoader.fromPath("player1.png");
         this.force = new Force(0, 0);
-        //this.bounds = new BoxPos(0, 0, 158 - 58, Screen.HEIGHT - 30);
+        this.bounds = new BoxPos(0, 0, 158, Screen.HEIGHT);
     }
 
     @Override

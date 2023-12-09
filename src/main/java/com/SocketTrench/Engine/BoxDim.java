@@ -12,24 +12,24 @@ public final class BoxDim {
         final int w,
         final int h
     ) {
-        this.w = w;
-        this.h = h;
         this.x = x;
         this.y = y;
+        this.w = w;
+        this.h = h;
     }
 
     @Override
     public final String toString() {
         return new StringBuilder()
-                .append("BoxDim { x: ")
-                .append(this.x)
-                .append(", y: ")
-                .append(this.y)
-                .append(", w: ")
-                .append(this.w)
-                .append(", h: ")
-                .append(this.h)
-                .append(" }")
-                .toString();
+            .append("BoxDim { x: ")
+            .append(this.x)
+            .append(", y: ")
+            .append(this.y)
+            .append(", w: ")
+            .append(this.w)
+            .append(", h: ")
+            .append(this.h)
+            .append(" }")
+            .toString();
     }
 }

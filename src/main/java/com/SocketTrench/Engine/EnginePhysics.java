@@ -5,24 +5,25 @@ final class EnginePhysics {
         final BoxDim body = gameObject.getBody();
         final Force force = gameObject.getForce();
         final BoxPos bounds = gameObject.getBounds();
-        if (force == null)
+        if (force == null){
             return;
+        }
+        body.x += force.x;
+        body.y += force.y;
         if (bounds == null) {
-            body.x += force.x;
-            body.y += force.y;
             return;
         }
         if (body.x < bounds.x1) {
             body.x = bounds.x1;
         }
-        if (body.x > bounds.x2) {
-            body.x = bounds.x2;
+        if (body.x > bounds.x2 - body.w) {
+            body.x = bounds.x2 - body.w;
         }
         if (body.y < bounds.y1) {
             body.y = bounds.y1;
         }
-        if (body.y > bounds.y2) {
-            body.y = bounds.y2;
+        if (body.y > bounds.y2 - body.h) {
+            body.y = bounds.y2 - body.h;
         }
     }
 }

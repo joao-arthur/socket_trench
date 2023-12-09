@@ -12,6 +12,6 @@ final class Player2GameObject extends DefaultGameObject {
         this.body = new BoxDim(Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30, 58, 30);
         this.texture = ImageLoader.fromPath("player2.png");
         this.force = new Force(0, 0);
-        //this.bounds = new BoxPos(Screen.WIDTH - 158,0, Screen.WIDTH, Screen.HEIGHT - 30);
+        this.bounds = new BoxPos(Screen.WIDTH - 158, 0, Screen.WIDTH, Screen.HEIGHT);
     }
 }
