@@ -8,13 +8,16 @@ import java.util.concurrent.TimeUnit;
 public final class EngineManager {
     private static final int FPS = 30;
     private final List<GameObject> gameObjects;
+    private final EngineState engineState;
     private final EngineRenderDispatcher matchRenderDispatcher;
 
     public EngineManager(
         final List<GameObject> gameObjects,
+        final EngineState engineState,
         final EngineRenderDispatcher matchRenderDispatcher
     ) {
         this.gameObjects = gameObjects;
+        this.engineState = engineState;
         this.matchRenderDispatcher = matchRenderDispatcher;
 
     }
@@ -28,9 +31,9 @@ public final class EngineManager {
     }
 
     public final void onUpdate() {
+        this.engineState.apply();
         for (final var gameObject : this.gameObjects) {
             EnginePhysics.apply(gameObject);
-            gameObject.onUpdate();
         }
         matchRenderDispatcher.dispatch("RENDER");
     }

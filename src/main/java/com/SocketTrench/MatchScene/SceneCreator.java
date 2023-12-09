@@ -1,6 +1,6 @@
 package com.SocketTrench.MatchScene;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.SocketTrench.Engine.EngineKeyAdapter;
 import com.SocketTrench.Engine.EngineManager;
@@ -14,7 +14,7 @@ import com.SocketTrench.Screens.MatchScreen;
 
 public final class SceneCreator {
     public static void create() {
-        final var gameObjects = new ArrayList<GameObject>();
+        final var gameObjects = new LinkedList<GameObject>();
         gameObjects.add(new BackgroundGameObject());
         gameObjects.add(new Player1GameObject());
         gameObjects.add(new Player2GameObject());
@@ -22,8 +22,8 @@ public final class SceneCreator {
         final var engineRenderDispatcher = new EngineRenderDispatcher();
         final var engineState = new EngineState(gameObjects);
         final var engineRenderer = new EngineRenderer(gameObjects);
-        final var engineManager = new EngineManager(gameObjects, engineRenderDispatcher);
-        final var engineKeyAdapter = new EngineKeyAdapter(gameObjects);
+        final var engineManager = new EngineManager(gameObjects, engineState, engineRenderDispatcher);
+        final var engineKeyAdapter = new EngineKeyAdapter(gameObjects, engineState);
 
         final var matchPanel = new MatchPanel(engineRenderer);
         engineRenderDispatcher.register(matchPanel);

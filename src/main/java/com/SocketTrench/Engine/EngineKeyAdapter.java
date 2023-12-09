@@ -8,10 +8,12 @@ import java.util.Set;
 
 public final class EngineKeyAdapter implements KeyListener {
     private final List<GameObject> gameObjects;
+    private final EngineState engineState;
     private final Set<Integer> keys;
 
-    public EngineKeyAdapter(final List<GameObject> gameObjects) {
+    public EngineKeyAdapter(final List<GameObject> gameObjects, final EngineState engineState) {
         this.gameObjects = gameObjects;
+        this.engineState = engineState;
         this.keys = new HashSet<>();
     }
 
@@ -26,7 +28,7 @@ public final class EngineKeyAdapter implements KeyListener {
             return;
         }
         for (final var gameObject : this.gameObjects) {
-            gameObject.onKeyPressed(keyCode);
+            gameObject.onKeyPressed(keyCode, this.engineState);
         }
     }
 

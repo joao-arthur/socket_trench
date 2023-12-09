@@ -11,7 +11,7 @@ final class ShootGameObject extends DefaultGameObject {
         final int y,
         final int speedX
     ) {
-        this.body = new BoxDim(x, y, 58, 30);
+        this.body = new BoxDim(x, y, 4, 2);
         this.force = new Point(speedX, 0);
         this.texture = ImageLoader.fromPath("shoot.png");
     }

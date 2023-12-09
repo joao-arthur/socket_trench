@@ -9,7 +9,7 @@ final class EnginePhysics {
         final BoxDim body = gameObject.getBody();
         final Point force = gameObject.getForce();
         final BoxPos bounds = gameObject.getBounds();
-        if (force == null){
+        if (force == null) {
             return;
         }
         body.x += force.x;

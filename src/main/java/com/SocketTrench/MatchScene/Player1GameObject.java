@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import com.SocketTrench.ImageLoader;
 import com.SocketTrench.Screens.Screen;
 import com.SocketTrench.Engine.DefaultGameObject;
+import com.SocketTrench.Engine.EngineState;
 import com.SocketTrench.Engine.Struct.BoxDim;
 import com.SocketTrench.Engine.Struct.BoxPos;
 import com.SocketTrench.Engine.Struct.Point;
@@ -18,7 +19,7 @@ final class Player1GameObject extends DefaultGameObject {
     }
 
     @Override
-    public final void onKeyPressed(final int keyCode) {
+    public final void onKeyPressed(final int keyCode, final EngineState engineState) {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 this.force.x = -4;
@@ -33,13 +34,13 @@ final class Player1GameObject extends DefaultGameObject {
                 this.force.y = 4;
                 break;
             case KeyEvent.VK_SPACE:
-                // create(
-                // new ShootGameObject(
-                // this.body.x + this.body.width,
-                // this.body.y + this.body.height / 2 - 1,
-                // 10
-                // )
-                // );
+                engineState.create(
+                    new ShootGameObject(
+                        this.body.x + this.body.w,
+                        this.body.y + this.body.h / 2 - 1,
+                        10
+                    )
+                );
                 break;
         }
     }

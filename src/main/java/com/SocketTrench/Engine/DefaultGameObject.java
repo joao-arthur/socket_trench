@@ -33,12 +33,7 @@ public abstract class DefaultGameObject implements GameObject {
     }
 
     @Override
-    public void onUpdate() {
-
-    }
-
-    @Override
-    public void onKeyPressed(final int keyCode) {
+    public void onKeyPressed(final int keyCode, final EngineState engineState) {
 
     }
 
