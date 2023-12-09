@@ -1,23 +1,23 @@
 package com.SocketTrench.Screens;
 
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUIScreen;
-import com.SocketTrench.Match.MatchKeyAdapter;
 
 public final class MatchScreen implements GUIScreen {
     private final JFrame frame;
     private final JPanel panel;
-    private final MatchKeyAdapter matchKeyAdapter;
+    private final KeyListener keyListener;
 
     public MatchScreen(
-        final JPanel panel,
-        final MatchKeyAdapter matchKeyAdapter
-    ) {
+            final JPanel panel,
+            final KeyListener keyListener) {
         this.frame = new JFrame();
         this.panel = panel;
-        this.matchKeyAdapter = matchKeyAdapter;
+        this.keyListener = keyListener;
         this.initComponents();
     }
 
@@ -29,7 +29,7 @@ public final class MatchScreen implements GUIScreen {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
-        frame.addKeyListener(matchKeyAdapter);
+        frame.addKeyListener(keyListener);
     }
 
     @Override

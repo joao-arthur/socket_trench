@@ -19,7 +19,7 @@ public final class Player2GameObject implements GameObject {
         this.body = new Body(58, 30, Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30);
         this.texture = ImageLoader.fromPath("player2.png");
         this.force = new Force(0, 0);
-        this.bounds = new Square(0, Screen.WIDTH - 158, 0, Screen.HEIGHT - 30);
+        this.bounds = new Square(Screen.WIDTH - 158, Screen.WIDTH, 0, Screen.HEIGHT - 30);
     }
 
     @Override
@@ -44,5 +44,15 @@ public final class Player2GameObject implements GameObject {
 
     @Override
     public final void onUpdate() {
+    }
+
+    @Override
+    public final void onKeyPressed(final int keyCode) {
+
+    }
+
+    @Override
+    public final void onKeyReleased(final int keyCode) {
+
     }
 }

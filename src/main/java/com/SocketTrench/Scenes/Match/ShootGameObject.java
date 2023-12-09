@@ -45,4 +45,14 @@ public final class ShootGameObject implements GameObject {
     @Override
     public final void onUpdate() {
     }
+
+    @Override
+    public final void onKeyPressed(final int keyCode) {
+
+    }
+
+    @Override
+    public final void onKeyReleased(final int keyCode) {
+
+    }
 }

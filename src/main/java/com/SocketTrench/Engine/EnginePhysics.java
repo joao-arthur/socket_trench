@@ -10,6 +10,7 @@ public class EnginePhysics {
         if (bounds == null) {
             body.x += force.x;
             body.y += force.y;
+            return;
         }
         if (body.x < bounds.x1) {
             body.x = bounds.x1;
