@@ -3,23 +3,23 @@ package com.SocketTrench.MatchScene;
 import java.awt.Image;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.Body;
+import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.Force;
 import com.SocketTrench.Engine.GameObject;
-import com.SocketTrench.Engine.Square;
+import com.SocketTrench.Engine.BoxPos;
 import com.SocketTrench.Screens.Screen;
 
 final class BackgroundGameObject implements GameObject {
-    public final Body body;
+    public final BoxDim body;
     public final Image texture;
 
     public BackgroundGameObject() {
-        this.body = new Body(Screen.WIDTH, Screen.HEIGHT, 0, 0);
+        this.body = new BoxDim(0, 0, Screen.WIDTH, Screen.HEIGHT);
         this.texture = ImageLoader.fromPath("background.png");
     }
 
     @Override
-    public final Body getBody() {
+    public final BoxDim getBody() {
         return this.body;
     }
 
@@ -34,7 +34,7 @@ final class BackgroundGameObject implements GameObject {
     }
 
     @Override
-    public final Square getBounds() {
+    public final BoxPos getBounds() {
         return null;
     }
 

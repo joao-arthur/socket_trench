@@ -3,13 +3,13 @@ package com.SocketTrench.MatchScene;
 import java.awt.Image;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.Body;
+import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.Force;
 import com.SocketTrench.Engine.GameObject;
-import com.SocketTrench.Engine.Square;
+import com.SocketTrench.Engine.BoxPos;
 
 final class ShootGameObject implements GameObject {
-    public final Body body;
+    public final BoxDim body;
     public final Image texture;
     public final Force force;
 
@@ -18,13 +18,13 @@ final class ShootGameObject implements GameObject {
         final int y,
         final int speedX
     ) {
-        this.body = new Body(58, 30, x, y);
+        this.body = new BoxDim(x, y, 58, 30);
         this.force = new Force(speedX, 0);
         this.texture = ImageLoader.fromPath("shoot.png");
     }
 
     @Override
-    public final Body getBody() {
+    public final BoxDim getBody() {
         return this.body;
     }
 
@@ -39,7 +39,7 @@ final class ShootGameObject implements GameObject {
     }
 
     @Override
-    public final Square getBounds() {
+    public final BoxPos getBounds() {
         return null;
     }
 

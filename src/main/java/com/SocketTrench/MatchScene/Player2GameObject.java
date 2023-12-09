@@ -3,27 +3,27 @@ package com.SocketTrench.MatchScene;
 import java.awt.Image;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.Body;
+import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.Force;
 import com.SocketTrench.Engine.GameObject;
-import com.SocketTrench.Engine.Square;
+import com.SocketTrench.Engine.BoxPos;
 import com.SocketTrench.Screens.Screen;
 
 final class Player2GameObject implements GameObject {
-    public final Body body;
+    public final BoxDim body;
     public final Image texture;
     public final Force force;
-    public final Square bounds;
+    public final BoxPos bounds;
 
     public Player2GameObject() {
-        this.body = new Body(58, 30, Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30);
+        this.body = new BoxDim(Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30, 58, 30);
         this.texture = ImageLoader.fromPath("player2.png");
         this.force = new Force(0, 0);
-        this.bounds = new Square(Screen.WIDTH - 158, Screen.WIDTH, 0, Screen.HEIGHT - 30);
+        this.bounds = new BoxPos(Screen.WIDTH - 158,0, Screen.WIDTH, Screen.HEIGHT - 30);
     }
 
     @Override
-    public final Body getBody() {
+    public final BoxDim getBody() {
         return this.body;
     }
 
@@ -38,7 +38,7 @@ final class Player2GameObject implements GameObject {
     }
 
     @Override
-    public final Square getBounds() {
+    public final BoxPos getBounds() {
         return this.bounds;
     }
 

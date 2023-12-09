@@ -4,27 +4,27 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Engine.Body;
+import com.SocketTrench.Engine.BoxDim;
 import com.SocketTrench.Engine.Force;
 import com.SocketTrench.Engine.GameObject;
-import com.SocketTrench.Engine.Square;
+import com.SocketTrench.Engine.BoxPos;
 import com.SocketTrench.Screens.Screen;
 
 final class Player1GameObject implements GameObject {
-    public final Body body;
+    public final BoxDim body;
     public final Image texture;
     public final Force force;
-    public final Square bounds;
+    public final BoxPos bounds;
 
     public Player1GameObject() {
-        this.body = new Body(58, 30, 0, 100);
+        this.body = new BoxDim(0, 100, 58, 30);
         this.texture = ImageLoader.fromPath("player1.png");
         this.force = new Force(0, 0);
-        this.bounds = null;// new Square(0, 158 - 58, 0, Screen.HEIGHT - 30);
+        this.bounds = new BoxPos(0, 0, 158 - 58, Screen.HEIGHT - 30);
     }
 
     @Override
-    public final Body getBody() {
+    public final BoxDim getBody() {
         return this.body;
     }
 
@@ -39,7 +39,7 @@ final class Player1GameObject implements GameObject {
     }
 
     @Override
-    public final Square getBounds() {
+    public final BoxPos getBounds() {
         return this.bounds;
     }
 

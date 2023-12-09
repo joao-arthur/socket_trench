@@ -2,9 +2,9 @@ package com.SocketTrench.Engine;
 
 final class EnginePhysics {
     public static void apply(GameObject gameObject) {
-        final Body body = gameObject.getBody();
+        final BoxDim body = gameObject.getBody();
         final Force force = gameObject.getForce();
-        final Square bounds = gameObject.getBounds();
+        final BoxPos bounds = gameObject.getBounds();
         if (force == null)
             return;
         if (bounds == null) {
