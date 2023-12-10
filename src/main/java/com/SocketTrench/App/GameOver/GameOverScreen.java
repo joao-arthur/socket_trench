@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.GameOver;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,15 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.GUI.GUIScreen;
 
-final class IdleClientScreen implements GUIScreen {
-    private final IdleClientService service;
+final class GameOverScreen implements GUIScreen {
+    private final GameOverService service;
     private final JFrame frame;
 
-    public IdleClientScreen(final IdleClientService service) {
+    public GameOverScreen(final GameOverService service) {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();
@@ -26,36 +26,28 @@ final class IdleClientScreen implements GUIScreen {
 
     private final void initComponents() {
         final var info = new JLabel();
-        info.setPreferredSize(new Dimension(400, 50));
-        info.setMaximumSize(new Dimension(400, 50));
+        info.setPreferredSize(new Dimension(300, 50));
+        info.setMaximumSize(new Dimension(300, 50));
         info.setHorizontalAlignment(JLabel.CENTER);
         info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         info.setFont(new Font("Arial", Font.PLAIN, 20));
-        info.setText("INPUT THE IP");
-
-        final var input = new JTextField();
-        input.setPreferredSize(new Dimension(400, 50));
-        input.setMaximumSize(new Dimension(400, 50));
-        input.setMinimumSize(new Dimension(400, 50));
-        input.setFont(new Font("Arial", Font.BOLD, 25));
-        input.setText("192.168.0.1");
+        info.setText("GAME OVER!");
 
         final var confirm = new JButton();
-        confirm.setPreferredSize(new Dimension(400, 50));
-        confirm.setMaximumSize(new Dimension(400, 50));
+        confirm.setPreferredSize(new Dimension(300, 50));
+        confirm.setMaximumSize(new Dimension(300, 50));
+        confirm.setHorizontalAlignment(JButton.CENTER);
         confirm.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        confirm.setText("CONFIRM");
+        confirm.setText("OK");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            this.service.connectTo(input.getText());
+            this.service.goToInitial();
         });
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
         content.add(info);
-        content.add(input);
-        content.add(Box.createVerticalGlue());
         content.add(confirm);
         content.add(Box.createVerticalGlue());
         content.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
@@ -69,7 +61,7 @@ final class IdleClientScreen implements GUIScreen {
 
         frame.add(container);
         frame.pack();
-        frame.setTitle("Client | Socket Trench");
+        frame.setTitle("Game Over | Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

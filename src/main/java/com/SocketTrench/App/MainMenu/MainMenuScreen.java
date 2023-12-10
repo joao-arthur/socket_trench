@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.MainMenu;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,49 +8,47 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.SocketTrench.GUI.GUI;
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.GUI.GUIScreen;
 
-final class YouWonScreen implements GUIScreen {
-    private final YouWonService service;
+final class InitialScreen implements GUIScreen {
+    private final InitialService service;
     private final JFrame frame;
 
-    public YouWonScreen(final YouWonService service) {
+    public InitialScreen(final InitialService service) {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
 
     private final void initComponents() {
-        final var info = new JLabel();
-        info.setPreferredSize(new Dimension(300, 50));
-        info.setMaximumSize(new Dimension(300, 50));
-        info.setHorizontalAlignment(JLabel.CENTER);
-        info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        info.setFont(new Font("Arial", Font.PLAIN, 20));
-        info.setText("YOU WON!");
+        final var createMatch = new JButton();
+        createMatch.setPreferredSize(new Dimension(250, 50));
+        createMatch.setMaximumSize(new Dimension(250, 50));
+        createMatch.setText("CREATE MATCH");
+        createMatch.setFont(new Font("Arial", 0, 20));
+        createMatch.addActionListener(event -> {
+            this.service.goToIdleServer();
+        });
 
-        final var confirm = new JButton();
-        confirm.setPreferredSize(new Dimension(300, 50));
-        confirm.setMaximumSize(new Dimension(300, 50));
-        confirm.setHorizontalAlignment(JButton.CENTER);
-        confirm.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        confirm.setText("OK");
-        confirm.setFont(new Font("Arial", 0, 20));
-        confirm.addActionListener(event -> {
-            this.service.goToInitial();
+        final var connectMatch = new JButton();
+        connectMatch.setPreferredSize(new Dimension(250, 50));
+        connectMatch.setMaximumSize(new Dimension(250, 50));
+        connectMatch.setText("CONNECT TO MATCH");
+        connectMatch.setFont(new Font("Arial", 0, 20));
+        connectMatch.addActionListener(event -> {
+            this.service.goToIdleClient();
         });
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
-        content.add(info);
-        content.add(confirm);
+        content.add(createMatch);
         content.add(Box.createVerticalGlue());
-        content.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
+        content.add(connectMatch);
+        content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
@@ -61,7 +59,7 @@ final class YouWonScreen implements GUIScreen {
 
         frame.add(container);
         frame.pack();
-        frame.setTitle("You won | Socket Trench");
+        frame.setTitle("Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -70,6 +68,6 @@ final class YouWonScreen implements GUIScreen {
 
     @Override
     public final void dispose() {
-        this.frame.dispose();
+        frame.dispose();
     }
 }

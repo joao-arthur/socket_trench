@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.IdleClient;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,14 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.GUI.GUIScreen;
 
-final class GameOverScreen implements GUIScreen {
-    private final GameOverService service;
+final class IdleClientScreen implements GUIScreen {
+    private final IdleClientService service;
     private final JFrame frame;
 
-    public GameOverScreen(final GameOverService service) {
+    public IdleClientScreen(final IdleClientService service) {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();
@@ -25,28 +27,36 @@ final class GameOverScreen implements GUIScreen {
 
     private final void initComponents() {
         final var info = new JLabel();
-        info.setPreferredSize(new Dimension(300, 50));
-        info.setMaximumSize(new Dimension(300, 50));
+        info.setPreferredSize(new Dimension(400, 50));
+        info.setMaximumSize(new Dimension(400, 50));
         info.setHorizontalAlignment(JLabel.CENTER);
         info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         info.setFont(new Font("Arial", Font.PLAIN, 20));
-        info.setText("GAME OVER!");
+        info.setText("INPUT THE IP");
+
+        final var input = new JTextField();
+        input.setPreferredSize(new Dimension(400, 50));
+        input.setMaximumSize(new Dimension(400, 50));
+        input.setMinimumSize(new Dimension(400, 50));
+        input.setFont(new Font("Arial", Font.BOLD, 25));
+        input.setText("192.168.0.1");
 
         final var confirm = new JButton();
-        confirm.setPreferredSize(new Dimension(300, 50));
-        confirm.setMaximumSize(new Dimension(300, 50));
-        confirm.setHorizontalAlignment(JButton.CENTER);
+        confirm.setPreferredSize(new Dimension(400, 50));
+        confirm.setMaximumSize(new Dimension(400, 50));
         confirm.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        confirm.setText("OK");
+        confirm.setText("CONFIRM");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            this.service.goToInitial();
+            this.service.connectTo(input.getText());
         });
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
         content.add(info);
+        content.add(input);
+        content.add(Box.createVerticalGlue());
         content.add(confirm);
         content.add(Box.createVerticalGlue());
         content.setPreferredSize(new Dimension(Screen.WIDTH, Screen.HEIGHT));
@@ -60,7 +70,7 @@ final class GameOverScreen implements GUIScreen {
 
         frame.add(container);
         frame.pack();
-        frame.setTitle("Game Over | Socket Trench");
+        frame.setTitle("Client | Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

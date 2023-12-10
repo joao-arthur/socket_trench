@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.IdleServer;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -25,5 +25,9 @@ final class IdleServerService {
             return null;
         }
         return null;
+    }
+
+    public final void createServer() {
+        
     }
 }

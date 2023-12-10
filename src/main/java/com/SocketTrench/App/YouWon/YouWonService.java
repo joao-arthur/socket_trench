@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.YouWon;
 
 import com.SocketTrench.GUI.GUI;
 

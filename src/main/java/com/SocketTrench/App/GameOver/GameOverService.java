@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.GameOver;
 
 import com.SocketTrench.GUI.GUI;
 

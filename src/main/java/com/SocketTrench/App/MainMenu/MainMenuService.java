@@ -1,8 +1,8 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.MainMenu;
 
 import com.SocketTrench.GUI.GUI;
 
-public final class InitialService {
+final class InitialService {
     public final void goToIdleServer() {
         final var service = new IdleServerService();
         final var screen = new IdleServerScreen(service);

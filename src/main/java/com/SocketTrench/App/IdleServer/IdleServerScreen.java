@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.IdleServer;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,47 +6,44 @@ import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class InitialScreen implements GUIScreen {
-    private final InitialService service;
+final class IdleServerScreen implements GUIScreen {
+    private final IdleServerService service;
     private final JFrame frame;
 
-    public InitialScreen(final InitialService service) {
+    public IdleServerScreen(final IdleServerService service) {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
 
     private final void initComponents() {
-        final var createMatch = new JButton();
-        createMatch.setPreferredSize(new Dimension(250, 50));
-        createMatch.setMaximumSize(new Dimension(250, 50));
-        createMatch.setText("CREATE MATCH");
-        createMatch.setFont(new Font("Arial", 0, 20));
-        createMatch.addActionListener(event -> {
-            this.service.goToIdleServer();
-        });
+        final var info = new JLabel();
+        info.setPreferredSize(new Dimension(400, 35));
+        info.setMaximumSize(new Dimension(400, 35));
+        info.setHorizontalAlignment(JLabel.CENTER);
+        info.setFont(new Font("Arial", Font.PLAIN, 20));
+        info.setText("CONNECT TO THE IP");
 
-        final var connectMatch = new JButton();
-        connectMatch.setPreferredSize(new Dimension(250, 50));
-        connectMatch.setMaximumSize(new Dimension(250, 50));
-        connectMatch.setText("CONNECT TO MATCH");
-        connectMatch.setFont(new Font("Arial", 0, 20));
-        connectMatch.addActionListener(event -> {
-            this.service.goToIdleClient();
-        });
+        final var ipValue = new JLabel();
+        ipValue.setPreferredSize(new Dimension(400, 35));
+        ipValue.setMaximumSize(new Dimension(400, 35));
+        ipValue.setHorizontalAlignment(JLabel.CENTER);
+        ipValue.setFont(new Font("Arial", Font.BOLD, 25));
+        ipValue.setText(this.service.getLocalIP());
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
-        content.add(createMatch);
+        content.add(info);
+        content.add(ipValue);
         content.add(Box.createVerticalGlue());
-        content.add(connectMatch);
         content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
@@ -58,7 +55,7 @@ public final class InitialScreen implements GUIScreen {
 
         frame.add(container);
         frame.pack();
-        frame.setTitle("Socket Trench");
+        frame.setTitle("Server | Socket Trench");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -67,6 +64,6 @@ public final class InitialScreen implements GUIScreen {
 
     @Override
     public final void dispose() {
-        frame.dispose();
+        this.frame.dispose();
     }
 }

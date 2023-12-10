@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App;
 
 public final class Screen {
     public static final int WIDTH = 700;

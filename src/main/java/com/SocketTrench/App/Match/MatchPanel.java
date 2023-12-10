@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.Match;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import com.SocketTrench.Engine.EngineRenderer;
 import com.SocketTrench.Events.Observer;
 
-public final class MatchPanel extends JPanel implements Observer<String> {
+final class MatchPanel extends JPanel implements Observer<String> {
     private final EngineRenderer engineRenderer;
 
     public MatchPanel(final EngineRenderer engineRenderer) {

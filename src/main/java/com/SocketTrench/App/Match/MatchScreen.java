@@ -1,4 +1,4 @@
-package com.SocketTrench.Screens;
+package com.SocketTrench.App.Match;
 
 import java.awt.event.KeyListener;
 
@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import com.SocketTrench.GUI.GUIScreen;
 
-public final class MatchScreen implements GUIScreen {
+final class MatchScreen implements GUIScreen {
     private final JFrame frame;
     private final JPanel panel;
     private final KeyListener keyListener;
