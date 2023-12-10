@@ -21,6 +21,7 @@ final class IdleServerScreen implements GUIScreen {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();
+        this.service.createServer();
     }
 
     private final void initComponents() {

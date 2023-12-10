@@ -1,19 +1,29 @@
 package com.SocketTrench.Socket;
 
 public final class SocketInstance {
-    private static SocketConnection socket;
+    private static SocketInstance instance;
+    private SocketConnection socket;
 
-    public static SocketConnection create(final SocketConnection socket) {
-        SocketInstance.socket = socket;
+    public static SocketInstance getInstance() {
+        if (SocketInstance.instance == null) {
+            SocketInstance.instance = new SocketInstance();
+        }
+        return SocketInstance.instance;
+    }
+
+    public final SocketConnection create(final SocketConnection socket) {
+        this.socket = socket;
         return socket;
     }
 
-    public static SocketConnection get() {
+    public final SocketConnection get() {
         return socket;
     }
 
-    public static void close() {
-        socket.close();
-        socket = null;
+    public final void close() {
+        if (socket != null) {
+            socket.close();
+            socket = null;
+        }
     }
 }

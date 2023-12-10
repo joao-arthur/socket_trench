@@ -9,7 +9,7 @@ import com.SocketTrench.App.Screen;
 import com.SocketTrench.Engine.EngineRenderer;
 import com.SocketTrench.Events.Observer;
 
-final class MatchPanel extends JPanel implements Observer<String> {
+final class MatchPanel extends JPanel implements Observer {
     private final EngineRenderer engineRenderer;
 
     public MatchPanel(final EngineRenderer engineRenderer) {

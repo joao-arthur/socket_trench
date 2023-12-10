@@ -11,15 +11,15 @@ import java.util.logging.Logger;
 public final class SocketClient implements SocketConnection {
     private final SocketService service = new SocketService();
 
-    public SocketClient(final String url) {
+    public SocketClient(final String ip) {
         new Thread(() -> {
             try {
-                final var socket = new Socket(url, SocketConstants.PORT);
+                final var socket = new Socket(ip, SocketConstants.PORT);
                 final var output = new PrintStream(socket.getOutputStream());
                 final var input = new Scanner(socket.getInputStream());
                 service.setParams(input, output, socket, null);
             } catch (ConnectException exception) {
-                service.manager.handleMessage(SocketMessages.CONNECTION_REFUSED);
+                service.manager.handleMessage(SocketMessages.CONN_REFUSED);
             } catch (IOException exception) {
                 Logger.getLogger(SocketClient.class.getName()).log(Level.SEVERE, null, exception);
             }

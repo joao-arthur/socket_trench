@@ -1,5 +1,6 @@
 package com.SocketTrench.Domain.IdleServer;
 
-class IdleServerDispatcher {
+import com.SocketTrench.Events.DefaultDispatcher;
 
+public final class IdleServerDispatcher extends DefaultDispatcher {
 }

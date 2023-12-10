@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.SocketTrench.App.Screen;
-import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
 final class YouWonScreen implements GUIScreen {

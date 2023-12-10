@@ -18,11 +18,10 @@ public final class SocketService {
     private boolean isOpen = true;
 
     public void setParams(
-        final Scanner input,
-        final PrintStream output,
-        final Socket socket,
-        final ServerSocket serverSocket
-    ) {
+            final Scanner input,
+            final PrintStream output,
+            final Socket socket,
+            final ServerSocket serverSocket) {
         this.input = input;
         this.output = output;
         this.socket = socket;
@@ -32,8 +31,8 @@ public final class SocketService {
 
     private void startObserving() {
         manager.handleMessage(serverSocket != null
-                ? SocketMessages.SERVER_CREATED
-                : SocketMessages.CLIENT_CREATED);
+                ? SocketMessages.CONN_SERVER
+                : SocketMessages.CONN_CLIENT);
         new Thread(() -> {
             try {
                 while (isOpen) {

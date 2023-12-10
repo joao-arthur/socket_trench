@@ -1,5 +1,6 @@
 package com.SocketTrench.Domain.Match;
 
-public class MatchDispatcher {
+import com.SocketTrench.Events.DefaultDispatcher;
 
+public final class MatchDispatcher extends DefaultDispatcher {
 }

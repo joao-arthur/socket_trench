@@ -1,5 +1,5 @@
 package com.SocketTrench.Events;
 
-public interface Observer<Event> {
-    public void handle(final Event event);
+public interface Observer {
+    public void handle(final String event);
 }

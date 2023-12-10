@@ -48,7 +48,7 @@ final class IdleClientScreen implements GUIScreen {
         confirm.setText("CONFIRM");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            this.service.connectTo(input.getText());
+            this.service.createClient(input.getText());
         });
 
         final var content = new JPanel();

@@ -5,21 +5,21 @@ public final class GUI {
     private GUIScreen currentScreen;
 
     public static GUI getInstance() {
-        if (instance == null) {
-            instance = new GUI();
+        if (GUI.instance == null) {
+            GUI.instance = new GUI();
         }
-        return instance;
+        return GUI.instance;
     }
 
     public final void goTo(final GUIScreen newScreen) {
         disposeCurrentScreen();
-        currentScreen = newScreen;
+        this.currentScreen = newScreen;
     }
 
     private final void disposeCurrentScreen() {
-        if (currentScreen != null) {
-            currentScreen.dispose();
-            currentScreen = null;
+        if (this.currentScreen != null) {
+            this.currentScreen.dispose();
+            this.currentScreen = null;
         }
     }
 }
