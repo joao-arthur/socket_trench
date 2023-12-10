@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.SocketTrench.Screens.Screen;
+import com.SocketTrench.App.Screen;
 
 public final class EngineRenderer {
     private final List<GameObject> gameObjects;

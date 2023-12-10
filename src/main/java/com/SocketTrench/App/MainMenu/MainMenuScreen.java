@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 import com.SocketTrench.App.Screen;
 import com.SocketTrench.GUI.GUIScreen;
 
-final class InitialScreen implements GUIScreen {
-    private final InitialService service;
+final class MainMenuScreen implements GUIScreen {
+    private final MainMenuService service;
     private final JFrame frame;
 
-    public InitialScreen(final InitialService service) {
+    public MainMenuScreen(final MainMenuService service) {
         this.service = service;
         this.frame = new JFrame();
         this.initComponents();

@@ -3,7 +3,7 @@ package com.SocketTrench.MatchScene;
 import java.awt.event.KeyEvent;
 
 import com.SocketTrench.ImageLoader;
-import com.SocketTrench.Screens.Screen;
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.Engine.DefaultGameObject;
 import com.SocketTrench.Engine.EngineState;
 import com.SocketTrench.Engine.Struct.BoxDim;

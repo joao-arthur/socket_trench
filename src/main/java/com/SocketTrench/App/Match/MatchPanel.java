@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.Engine.EngineRenderer;
 import com.SocketTrench.Events.Observer;
 

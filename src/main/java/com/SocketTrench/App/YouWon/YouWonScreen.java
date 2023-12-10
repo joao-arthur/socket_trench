@@ -42,7 +42,7 @@ final class YouWonScreen implements GUIScreen {
         confirm.setText("OK");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            this.service.goToInitial();
+            this.service.goToMainMenu();
         });
 
         final var content = new JPanel();

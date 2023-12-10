@@ -1,11 +1,9 @@
 package com.SocketTrench.App.GameOver;
 
-import com.SocketTrench.GUI.GUI;
+import com.SocketTrench.App.MainMenu.MainMenuBuilder;
 
 final class GameOverService {
-    public final void goToInitial() {
-        final var service = new InitialService();
-        final var screen = new InitialScreen(service);
-        GUI.getInstance().goTo(screen);
+    public final void goToMainMenu() {
+        new MainMenuBuilder().build();
     }
 }

@@ -1,17 +1,14 @@
 package com.SocketTrench.App.MainMenu;
 
-import com.SocketTrench.GUI.GUI;
+import com.SocketTrench.App.IdleClient.IdleClientBuilder;
+import com.SocketTrench.App.IdleServer.IdleServerBuilder;
 
-final class InitialService {
+final class MainMenuService {
     public final void goToIdleServer() {
-        final var service = new IdleServerService();
-        final var screen = new IdleServerScreen(service);
-        GUI.getInstance().goTo(screen);
+        new IdleServerBuilder().build();
     }
 
     public final void goToIdleClient() {
-        final var service = new IdleClientService();
-        final var screen = new IdleClientScreen(service);
-        GUI.getInstance().goTo(screen);
+        new IdleClientBuilder().build();
     }
 }

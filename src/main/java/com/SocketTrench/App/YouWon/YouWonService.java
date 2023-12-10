@@ -1,11 +1,9 @@
 package com.SocketTrench.App.YouWon;
 
-import com.SocketTrench.GUI.GUI;
+import com.SocketTrench.App.MainMenu.MainMenuBuilder;
 
 final class YouWonService {
-    public final void goToInitial() {
-        final var service = new InitialService();
-        final var screen = new InitialScreen(service);
-        GUI.getInstance().goTo(screen);
+    public final void goToMainMenu() {
+        new MainMenuBuilder().build();
     }
 }

@@ -8,9 +8,7 @@ import com.SocketTrench.Engine.EngineRenderDispatcher;
 import com.SocketTrench.Engine.EngineRenderer;
 import com.SocketTrench.Engine.EngineState;
 import com.SocketTrench.Engine.GameObject;
-import com.SocketTrench.GUI.GUI;
-import com.SocketTrench.Screens.MatchPanel;
-import com.SocketTrench.Screens.MatchScreen;
+import com.SocketTrench.App.Match.MatchBuilder;
 
 public final class SceneCreator {
     public static void create() {
@@ -18,17 +16,12 @@ public final class SceneCreator {
         gameObjects.add(new BackgroundGameObject());
         gameObjects.add(new Player1GameObject());
         gameObjects.add(new Player2GameObject());
-
-        final var engineRenderDispatcher = new EngineRenderDispatcher();
-        final var engineState = new EngineState(gameObjects);
-        final var engineRenderer = new EngineRenderer(gameObjects);
-        final var engineManager = new EngineManager(gameObjects, engineState, engineRenderDispatcher);
-        final var engineKeyAdapter = new EngineKeyAdapter(gameObjects, engineState);
-
-        final var matchPanel = new MatchPanel(engineRenderer);
-        engineRenderDispatcher.register(matchPanel);
-        final var matchScreen = new MatchScreen(matchPanel, engineKeyAdapter);
-        GUI.getInstance().goTo(matchScreen);
-        engineManager.onInit();
+        final var dispatcher = new EngineRenderDispatcher();
+        final var state = new EngineState(gameObjects);
+        final var renderer = new EngineRenderer(gameObjects);
+        final var manager = new EngineManager(gameObjects, state, dispatcher);
+        final var keyAdapter = new EngineKeyAdapter(gameObjects, state);
+        new MatchBuilder().build(dispatcher, renderer, keyAdapter);
+        manager.onInit();
     }
 }

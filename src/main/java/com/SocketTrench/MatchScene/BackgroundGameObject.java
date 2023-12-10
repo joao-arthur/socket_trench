@@ -3,7 +3,7 @@ package com.SocketTrench.MatchScene;
 import com.SocketTrench.ImageLoader;
 import com.SocketTrench.Engine.DefaultGameObject;
 import com.SocketTrench.Engine.Struct.BoxDim;
-import com.SocketTrench.Screens.Screen;
+import com.SocketTrench.App.Screen;
 
 final class BackgroundGameObject extends DefaultGameObject {
     public BackgroundGameObject() {
