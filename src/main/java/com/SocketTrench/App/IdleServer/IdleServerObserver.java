@@ -45,10 +45,10 @@ class IdleServerObserver implements Observer {
     }
 
     private final void connClient() {
-        new MatchBuilder().buildPlayer1();
+        new MatchBuilder().buildPlayer2();
     }
 
     private final void connServer() {
-        new MatchBuilder().buildPlayer2();
+        new MatchBuilder().buildPlayer1();
     }
 }
