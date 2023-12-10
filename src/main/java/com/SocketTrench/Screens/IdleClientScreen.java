@@ -12,13 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
 final class IdleClientScreen implements GUIScreen {
+    private final IdleClientService service;
     private final JFrame frame;
 
-    public IdleClientScreen() {
+    public IdleClientScreen(final IdleClientService service) {
+        this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
@@ -36,7 +37,7 @@ final class IdleClientScreen implements GUIScreen {
         input.setPreferredSize(new Dimension(400, 50));
         input.setMaximumSize(new Dimension(400, 50));
         input.setMinimumSize(new Dimension(400, 50));
-        input.setFont(new Font("Arial", Font.PLAIN, 30));
+        input.setFont(new Font("Arial", Font.BOLD, 25));
         input.setText("192.168.0.1");
 
         final var confirm = new JButton();
@@ -46,7 +47,7 @@ final class IdleClientScreen implements GUIScreen {
         confirm.setText("CONFIRM");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            // GUI.getInstance().goTo(new MatchScreen());
+            this.service.connectTo(input.getText());
         });
 
         final var content = new JPanel();

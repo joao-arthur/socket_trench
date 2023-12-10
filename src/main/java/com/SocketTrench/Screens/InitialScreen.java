@@ -10,14 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
-import com.SocketTrench.MatchScene.SceneCreator;
 
 public final class InitialScreen implements GUIScreen {
+    private final InitialService service;
     private final JFrame frame;
 
-    public InitialScreen() {
+    public InitialScreen(final InitialService service) {
+        this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
@@ -29,7 +29,7 @@ public final class InitialScreen implements GUIScreen {
         createMatch.setText("CREATE MATCH");
         createMatch.setFont(new Font("Arial", 0, 20));
         createMatch.addActionListener(event -> {
-            SceneCreator.create();
+            this.service.goToIdleServer();
         });
 
         final var connectMatch = new JButton();
@@ -38,7 +38,7 @@ public final class InitialScreen implements GUIScreen {
         connectMatch.setText("CONNECT TO MATCH");
         connectMatch.setFont(new Font("Arial", 0, 20));
         connectMatch.addActionListener(event -> {
-            GUI.getInstance().goTo(new IdleClientScreen());
+            this.service.goToIdleClient();
         });
 
         final var content = new JPanel();

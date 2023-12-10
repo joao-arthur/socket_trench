@@ -11,13 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
 final class GameOverScreen implements GUIScreen {
+    private final GameOverService service;
     private final JFrame frame;
 
-    public GameOverScreen() {
+    public GameOverScreen(final GameOverService service) {
+        this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
@@ -39,7 +40,7 @@ final class GameOverScreen implements GUIScreen {
         confirm.setText("OK");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            GUI.getInstance().goTo(new InitialScreen());
+            this.service.goToInitial();
         });
 
         final var content = new JPanel();

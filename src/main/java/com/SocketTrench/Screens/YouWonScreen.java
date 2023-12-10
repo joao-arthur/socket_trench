@@ -15,9 +15,11 @@ import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.GUI.GUIScreen;
 
 final class YouWonScreen implements GUIScreen {
+    private final YouWonService service;
     private final JFrame frame;
 
-    public YouWonScreen() {
+    public YouWonScreen(final YouWonService service) {
+        this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
@@ -39,7 +41,7 @@ final class YouWonScreen implements GUIScreen {
         confirm.setText("OK");
         confirm.setFont(new Font("Arial", 0, 20));
         confirm.addActionListener(event -> {
-            GUI.getInstance().goTo(new InitialScreen());
+            this.service.goToInitial();
         });
 
         final var content = new JPanel();

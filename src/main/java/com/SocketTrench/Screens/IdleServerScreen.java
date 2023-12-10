@@ -13,9 +13,11 @@ import javax.swing.JPanel;
 import com.SocketTrench.GUI.GUIScreen;
 
 final class IdleServerScreen implements GUIScreen {
+    private final IdleServerService service;
     private final JFrame frame;
 
-    public IdleServerScreen() {
+    public IdleServerScreen(final IdleServerService service) {
+        this.service = service;
         this.frame = new JFrame();
         this.initComponents();
     }
@@ -32,15 +34,15 @@ final class IdleServerScreen implements GUIScreen {
         ipValue.setPreferredSize(new Dimension(400, 35));
         ipValue.setMaximumSize(new Dimension(400, 35));
         ipValue.setHorizontalAlignment(JLabel.CENTER);
-        ipValue.setFont(new Font("Arial", Font.PLAIN, 30));
-        ipValue.setText("192.168.0.1");
+        ipValue.setFont(new Font("Arial", Font.BOLD, 25));
+        ipValue.setText(this.service.getLocalIP());
 
         final var content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
         content.add(Box.createVerticalGlue());
         content.add(info);
-        content.add(Box.createVerticalGlue());
         content.add(ipValue);
+        content.add(Box.createVerticalGlue());
         content.add(Box.createVerticalGlue());
 
         final var container = new JPanel(new FlowLayout());
