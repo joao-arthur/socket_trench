@@ -1,14 +1,14 @@
 package com.SocketTrench.Socket;
 
 public final class SocketInstance {
-    private static SocketInterface socket;
+    private static SocketConnection socket;
 
-    public static SocketInterface create(final SocketInterface socket) {
+    public static SocketConnection create(final SocketConnection socket) {
         SocketInstance.socket = socket;
         return socket;
     }
 
-    public static SocketInterface get() {
+    public static SocketConnection get() {
         return socket;
     }
 

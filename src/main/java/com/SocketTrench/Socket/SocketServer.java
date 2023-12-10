@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class SocketServer implements SocketInterface {
+public final class SocketServer implements SocketConnection {
     private final SocketService service = new SocketService();
 
     public SocketServer() {

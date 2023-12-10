@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class SocketClient implements SocketInterface {
+public final class SocketClient implements SocketConnection {
     private final SocketService service = new SocketService();
 
     public SocketClient(final String url) {
