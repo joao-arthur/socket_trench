@@ -1,5 +1,6 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Domain;
 
+import com.SocketTrench.Engine.GameObject;
 import com.SocketTrench.Engine.Struct.BoxDim;
 import com.SocketTrench.Engine.Struct.BoxPos;
 import com.SocketTrench.Engine.Struct.Point;

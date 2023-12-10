@@ -11,6 +11,5 @@ public interface GameObject {
     public Image getTexture();
     public Point getForce();
     public BoxPos getBounds();
-    public void onKeyPressed(final int keyCode, final EngineState engineState);
-    public void onKeyReleased(final int keyCode);
+    public InputHandler getInputHandler();
 }

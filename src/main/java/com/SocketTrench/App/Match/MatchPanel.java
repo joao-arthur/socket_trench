@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import com.SocketTrench.App.Screen;
-import com.SocketTrench.Engine.EngineRenderer;
+import com.SocketTrench.Engine.Domain.EngineRenderer;
 import com.SocketTrench.Events.Observer;
 
 final class MatchPanel extends JPanel implements Observer {

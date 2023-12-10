@@ -1,4 +1,4 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Domain;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.SocketTrench.App.Screen;
+import com.SocketTrench.Engine.GameObject;
 
 public final class EngineRenderer {
     private final List<GameObject> gameObjects;

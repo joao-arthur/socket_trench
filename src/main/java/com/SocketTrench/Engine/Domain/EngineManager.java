@@ -1,25 +1,26 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Domain;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.SocketTrench.Engine.EngineRenderDispatcher;
+import com.SocketTrench.Engine.GameObject;
+
 public final class EngineManager {
     private static final int FPS = 30;
     private final List<GameObject> gameObjects;
     private final EngineState engineState;
-    private final EngineRenderDispatcher matchRenderDispatcher;
+    private final EngineRenderDispatcher dispatcher;
 
     public EngineManager(
-        final List<GameObject> gameObjects,
-        final EngineState engineState,
-        final EngineRenderDispatcher matchRenderDispatcher
-    ) {
+            final List<GameObject> gameObjects,
+            final EngineState engineState,
+            final EngineRenderDispatcher dispatcher) {
         this.gameObjects = gameObjects;
         this.engineState = engineState;
-        this.matchRenderDispatcher = matchRenderDispatcher;
-
+        this.dispatcher = dispatcher;
     }
 
     public final void onInit() {
@@ -35,6 +36,6 @@ public final class EngineManager {
         for (final var gameObject : this.gameObjects) {
             EnginePhysics.apply(gameObject);
         }
-        matchRenderDispatcher.dispatch("RENDER");
+        dispatcher.dispatch("RENDER");
     }
 }

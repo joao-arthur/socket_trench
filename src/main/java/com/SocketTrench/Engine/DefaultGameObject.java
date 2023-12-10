@@ -11,6 +11,7 @@ public abstract class DefaultGameObject implements GameObject {
     public Image texture = null;
     public Point force = null;
     public BoxPos bounds = null;
+    public InputHandler inputHandler = null;
 
     @Override
     public final BoxDim getBody() {
@@ -33,12 +34,7 @@ public abstract class DefaultGameObject implements GameObject {
     }
 
     @Override
-    public void onKeyPressed(final int keyCode, final EngineState engineState) {
-
-    }
-
-    @Override
-    public void onKeyReleased(final int keyCode) {
-
+    public InputHandler getInputHandler() {
+        return this.inputHandler;
     }
 }

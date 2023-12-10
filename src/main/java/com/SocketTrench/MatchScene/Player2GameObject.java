@@ -8,10 +8,11 @@ import com.SocketTrench.Engine.Struct.BoxPos;
 import com.SocketTrench.Engine.Struct.Point;
 
 final class Player2GameObject extends DefaultGameObject {
-    public Player2GameObject() {
+    public Player2GameObject(final boolean canInput) {
         this.body = new BoxDim(Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30, 58, 30);
         this.texture = ImageLoader.fromPath("player2.png");
         this.force = new Point(0, 0);
         this.bounds = new BoxPos(Screen.WIDTH - 158, 0, Screen.WIDTH, Screen.HEIGHT);
+        this.inputHandler = canInput ? new Player2InputHandler(this) : null;
     }
 }

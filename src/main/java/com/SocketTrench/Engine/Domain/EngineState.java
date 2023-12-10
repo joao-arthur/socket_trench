@@ -1,7 +1,9 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Domain;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.SocketTrench.Engine.GameObject;
 
 public final class EngineState {
     private final List<GameObject> gameObjects;

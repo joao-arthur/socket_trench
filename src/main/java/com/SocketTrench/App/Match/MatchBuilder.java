@@ -1,10 +1,10 @@
 package com.SocketTrench.App.Match;
 
-import com.SocketTrench.Engine.EngineKeyAdapter;
-import com.SocketTrench.Engine.EngineManager;
 import com.SocketTrench.Engine.EngineRenderDispatcher;
-import com.SocketTrench.Engine.EngineRenderer;
-import com.SocketTrench.Engine.EngineState;
+import com.SocketTrench.Engine.Domain.EngineKeyAdapter;
+import com.SocketTrench.Engine.Domain.EngineManager;
+import com.SocketTrench.Engine.Domain.EngineRenderer;
+import com.SocketTrench.Engine.Domain.EngineState;
 import com.SocketTrench.GUI.GUI;
 import com.SocketTrench.MatchScene.SceneCreator;
 
@@ -20,6 +20,7 @@ public final class MatchBuilder {
         final var screen = new MatchScreen(panel, keyListener);
         dispatcher.register(panel);
         GUI.getInstance().goTo(screen);
+        manager.onInit();
     }
 
     public final void buildPlayer2() {
@@ -33,5 +34,6 @@ public final class MatchBuilder {
         final var screen = new MatchScreen(panel, keyListener);
         dispatcher.register(panel);
         GUI.getInstance().goTo(screen);
+        manager.onInit();
     }
 }

@@ -1,10 +1,12 @@
-package com.SocketTrench.Engine;
+package com.SocketTrench.Engine.Domain;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.SocketTrench.Engine.GameObject;
 
 public final class EngineKeyAdapter implements KeyListener {
     private final List<GameObject> gameObjects;
@@ -28,7 +30,10 @@ public final class EngineKeyAdapter implements KeyListener {
             return;
         }
         for (final var gameObject : this.gameObjects) {
-            gameObject.onKeyPressed(keyCode, this.engineState);
+            final var inputHandler = gameObject.getInputHandler();
+            if (inputHandler != null) {
+                inputHandler.onKeyPressed(keyCode, this.engineState);
+            }
         }
     }
 
@@ -37,7 +42,10 @@ public final class EngineKeyAdapter implements KeyListener {
         final Integer keyCode = event.getKeyCode();
         this.keys.remove(keyCode);
         for (final var gameObject : this.gameObjects) {
-            gameObject.onKeyReleased(keyCode);
+            final var inputHandler = gameObject.getInputHandler();
+            if (inputHandler != null) {
+                inputHandler.onKeyReleased(keyCode);
+            }
         }
     }
 }
