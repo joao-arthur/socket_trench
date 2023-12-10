@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.SocketTrench.App.Screen;
 import com.SocketTrench.Engine.EngineRenderDispatcher;
 import com.SocketTrench.Engine.GameObject;
 
@@ -15,9 +16,10 @@ public final class EngineManager {
     private final EngineRenderDispatcher dispatcher;
 
     public EngineManager(
-            final List<GameObject> gameObjects,
-            final EngineState engineState,
-            final EngineRenderDispatcher dispatcher) {
+        final List<GameObject> gameObjects,
+        final EngineState engineState,
+        final EngineRenderDispatcher dispatcher
+    ) {
         this.gameObjects = gameObjects;
         this.engineState = engineState;
         this.dispatcher = dispatcher;
@@ -35,6 +37,17 @@ public final class EngineManager {
         this.engineState.apply();
         for (final var gameObject : this.gameObjects) {
             EnginePhysics.apply(gameObject);
+            final var body = gameObject.getBody();
+            if (body != null) {
+                if (
+                    body.x + body.w < 0 ||
+                    body.y + body.h < 0 ||
+                    body.x > Screen.WIDTH ||
+                    body.y > Screen.HEIGHT
+                ) {
+                    gameObject.onLeaveScreen(this.engineState);
+                }
+            }
         }
         dispatcher.dispatch("RENDER");
     }

@@ -18,10 +18,11 @@ public final class SocketService {
     private boolean isOpen = true;
 
     public void setParams(
-            final Scanner input,
-            final PrintStream output,
-            final Socket socket,
-            final ServerSocket serverSocket) {
+        final Scanner input,
+        final PrintStream output,
+        final Socket socket,
+        final ServerSocket serverSocket
+    ) {
         this.input = input;
         this.output = output;
         this.socket = socket;

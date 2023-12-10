@@ -14,8 +14,9 @@ public class MatchObserver implements Observer {
     private final Player opponent;
 
     public MatchObserver(
-            final EngineState engineState,
-            final Player opponent) {
+        final EngineState engineState,
+        final Player opponent
+    ) {
         this.engineState = engineState;
         this.opponent = opponent;
     }

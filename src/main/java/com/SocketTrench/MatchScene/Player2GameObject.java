@@ -20,10 +20,12 @@ public final class Player2GameObject extends DefaultGameObject implements Player
     @Override
     public final void shoot(final EngineState engineState) {
         engineState.create(
-                new ShootGameObject(
-                        this.body.x - 4,
-                        this.body.y + this.body.h / 2 - 1,
-                        -10));
+            new ShootGameObject(
+                this.body.x - 4,
+                this.body.y + this.body.h / 2 - 1,
+                -10
+            )
+        );
     }
 
     @Override
