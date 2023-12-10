@@ -2,6 +2,7 @@ package com.SocketTrench.App.IdleClient;
 
 import javax.swing.JOptionPane;
 
+import com.SocketTrench.App.Match.MatchBuilder;
 import com.SocketTrench.Events.Observer;
 import com.SocketTrench.Socket.SocketMessages;
 
@@ -27,25 +28,27 @@ class IdleClientObserver implements Observer {
 
     private final void connRefused() {
         JOptionPane.showMessageDialog(
-                null,
-                "It wasn't possible to establish connection!", "ERROR!",
-                JOptionPane.ERROR_MESSAGE);
+            null,
+            "It wasn't possible to establish connection!", "ERROR!",
+            JOptionPane.ERROR_MESSAGE
+        );
         System.exit(0);
     }
 
     private final void portInUse() {
         JOptionPane.showMessageDialog(
-                null,
-                "The port '54321' is already in use!", "ERROR!",
-                JOptionPane.ERROR_MESSAGE);
+            null,
+            "The port '54321' is already in use!", "ERROR!",
+            JOptionPane.ERROR_MESSAGE
+        );
         System.exit(0);
     }
 
     private final void connClient() {
-        // new Match( player2);
+        new MatchBuilder().buildPlayer1();
     }
 
     private final void connServer() {
-        // newmatch(player1)
+        new MatchBuilder().buildPlayer2();
     }
 }

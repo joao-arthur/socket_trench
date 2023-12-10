@@ -28,13 +28,7 @@ final class Player2InputHandler implements InputHandler {
                 this.player2.force.y = 4;
                 break;
             case KeyEvent.VK_SPACE:
-                engineState.create(
-                    new ShootGameObject(
-                        this.player2.body.x - 4,
-                        this.player2.body.y + this.player2.body.h / 2 - 1,
-                        -10
-                    )
-                );
+                this.player2.shoot(engineState);
                 break;
         }
     }

@@ -16,7 +16,7 @@ public final class SocketInstance {
         return socket;
     }
 
-    public final SocketConnection get() {
+    public final SocketConnection getConnection() {
         return socket;
     }
 

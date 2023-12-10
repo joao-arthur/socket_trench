@@ -22,7 +22,9 @@ public final class EngineRenderer {
         for (var gameObject : this.gameObjects) {
             final var texture = gameObject.getTexture();
             final var body = gameObject.getBody();
-            bufferGraphics.drawImage(texture, body.x, body.y, body.w, body.h, null);
+            if (texture != null && body != null) {
+                bufferGraphics.drawImage(texture, body.x, body.y, body.w, body.h, null);
+            }
         }
         graphics.drawImage(buffer, 0, 0, null);
         bufferGraphics.dispose();

@@ -28,17 +28,19 @@ class IdleServerObserver implements Observer {
 
     private final void connRefused() {
         JOptionPane.showMessageDialog(
-                null,
-                "It wasn't possible to establish connection!", "ERROR!",
-                JOptionPane.ERROR_MESSAGE);
+            null,
+            "It wasn't possible to establish connection!", "ERROR!",
+            JOptionPane.ERROR_MESSAGE
+        );
         System.exit(0);
     }
 
     private final void portInUse() {
         JOptionPane.showMessageDialog(
-                null,
-                "The port '54321' is already in use!", "ERROR!",
-                JOptionPane.ERROR_MESSAGE);
+            null,
+            "The port '54321' is already in use!", "ERROR!",
+            JOptionPane.ERROR_MESSAGE
+        );
         System.exit(0);
     }
 
