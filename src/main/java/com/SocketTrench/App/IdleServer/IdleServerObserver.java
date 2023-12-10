@@ -2,6 +2,7 @@ package com.SocketTrench.App.IdleServer;
 
 import javax.swing.JOptionPane;
 
+import com.SocketTrench.App.Match.MatchBuilder;
 import com.SocketTrench.Events.Observer;
 import com.SocketTrench.Socket.SocketMessages;
 
@@ -42,10 +43,10 @@ class IdleServerObserver implements Observer {
     }
 
     private final void connClient() {
-        // new Match( player2);
+        new MatchBuilder().buildPlayer1();
     }
 
     private final void connServer() {
-        // newmatch(player1)
+        new MatchBuilder().buildPlayer2();
     }
 }
