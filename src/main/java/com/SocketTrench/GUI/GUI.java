@@ -5,8 +5,9 @@ public final class GUI {
     private GUIScreen currentScreen;
 
     public static GUI getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new GUI();
+        }
         return instance;
     }
 
