@@ -37,15 +37,37 @@ public final class EngineManager {
         this.engineState.apply();
         for (final var gameObject : this.gameObjects) {
             EnginePhysics.apply(gameObject);
-            final var body = gameObject.getBody();
-            if (body != null) {
-                if (
-                    body.x + body.w < 0 ||
-                    body.y + body.h < 0 ||
-                    body.x > Screen.WIDTH ||
-                    body.y > Screen.HEIGHT
-                ) {
-                    gameObject.onLeaveScreen(this.engineState);
+        }
+         for (final var gameObject : this.gameObjects) {
+             final var body = gameObject.getBody();
+             if (body != null) {
+                 if (
+                     body.x + body.w < 0 ||
+                     body.y + body.h < 0 ||
+                     body.x > Screen.WIDTH ||
+                     body.y > Screen.HEIGHT
+                 ) {
+                     gameObject.onLeaveScreen(this.engineState);
+                 }
+             }
+        }
+        for (final var gameObject: this.gameObjects) {
+            final var collider = gameObject.getCollider();
+            if (collider != null) {
+                for (final var other: this.gameObjects) {
+                    if (gameObject != other) {
+                        final var otherBody = other.getCollider();
+                        if (otherBody != null) {
+                            if (
+                                collider.x < otherBody.x + otherBody.w &&
+                                collider.x + collider.w > otherBody.x &&
+                                collider.y < otherBody.y + otherBody.h &&
+                                collider.y + collider.h > otherBody.y
+                            ) {
+                                gameObject.onCollideWith(other, engineState);
+                            }
+                        }
+                    }
                 }
             }
         }

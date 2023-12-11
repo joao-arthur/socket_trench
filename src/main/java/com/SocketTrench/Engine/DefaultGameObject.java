@@ -9,6 +9,7 @@ import com.SocketTrench.Engine.Struct.Point;
 
 public abstract class DefaultGameObject implements GameObject {
     public BoxDim body = null;
+    public BoxDim collider = null;
     public Image texture = null;
     public Point force = null;
     public BoxPos bounds = null;
@@ -17,6 +18,11 @@ public abstract class DefaultGameObject implements GameObject {
     @Override
     public final BoxDim getBody() {
         return this.body;
+    }
+
+    @Override
+    public final BoxDim getCollider() {
+        return this.collider;
     }
 
     @Override
@@ -41,5 +47,9 @@ public abstract class DefaultGameObject implements GameObject {
 
     @Override
     public void onLeaveScreen(final EngineState engineState) {
+    }
+
+    @Override
+    public void onCollideWith(final GameObject other, final EngineState engineState) {
     }
 }
