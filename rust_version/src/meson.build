@@ -1,11 +1,12 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 gnome = import('gnome')
 
-gnome.compile_resources('socket_trench',
-  'socket_trench.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
+gnome.compile_resources(
+    'socket_trench',
+    'socket_trench.gresource.xml',
+    gresource_bundle: true,
+    install: true,
+    install_dir: pkgdatadir,
 )
 
 conf = configuration_data()
@@ -20,12 +21,11 @@ configure_file(
     configuration: conf
 )
 
-# Copy the config.rs output to the source directory.
 run_command(
-  'cp',
-  meson.project_build_root() / 'src' / 'config.rs',
-  meson.project_source_root() / 'src' / 'config.rs',
-  check: true
+    'cp',
+    meson.project_build_root() / 'src' / 'config.rs',
+    meson.project_source_root() / 'src' / 'config.rs',
+    check: true
 )
 
 cargo_bin  = find_program('cargo')
@@ -34,23 +34,28 @@ cargo_opt += [ '--target-dir', meson.project_build_root()  / 'src' ]
 cargo_env  = [ 'CARGO_HOME=' + meson.project_build_root()  / 'cargo-home' ]
 
 if get_option('buildtype') == 'release'
-  cargo_opt += [ '--release' ]
-  rust_target = 'release'
+    cargo_opt += [ '--release' ]
+    rust_target = 'release'
 else
-  rust_target = 'debug'
+    rust_target = 'debug'
 endif
 
 cargo_build = custom_target(
-  'cargo-build',
-  build_by_default: true,
-  build_always_stale: true,
-  output: meson.project_name(),
-  console: true,
-  install: true,
-  install_dir: get_option('bindir'),
-  command: [
-    'env', cargo_env,
-    cargo_bin, 'build',
-    cargo_opt, '&&', 'cp', 'src' / rust_target / meson.project_name(), '@OUTPUT@',
-  ]
+    'cargo-build',
+    build_by_default: true,
+    build_always_stale: true,
+    output: meson.project_name(),
+    console: true,
+    install: true,
+    install_dir: get_option('bindir'),
+    command: [
+        'env',
+        cargo_env,
+        cargo_bin,
+        'build',
+        cargo_opt,
+        '&&',
+        'cp',
+        'src' / rust_target / meson.project_name(), '@OUTPUT@',
+    ]
 )

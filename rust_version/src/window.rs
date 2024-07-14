@@ -1,24 +1,24 @@
-use gtk::prelude::*;
-use adw::subclass::prelude::*;
-use gtk::{gio, glib};
+use gtk4::prelude::*;
+use libadwaita::subclass::prelude::*;
+use gtk4::{gio, glib};
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, gtk4::CompositeTemplate)]
     #[template(resource = "/com/joao_arthur/socket_trench/window.ui")]
     pub struct SocketTrenchWindow {
         #[template_child]
-        pub header_bar: TemplateChild<adw::HeaderBar>,
+        pub header_bar: TemplateChild<libadwaita::HeaderBar>,
         #[template_child]
-        pub label: TemplateChild<gtk::Label>,
+        pub label: TemplateChild<gtk4::Label>,
     }
 
     #[glib::object_subclass]
     impl ObjectSubclass for SocketTrenchWindow {
         const NAME: &'static str = "SocketTrenchWindow";
         type Type = super::SocketTrenchWindow;
-        type ParentType = adw::ApplicationWindow;
+        type ParentType = libadwaita::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -38,11 +38,12 @@ mod imp {
 
 glib::wrapper! {
     pub struct SocketTrenchWindow(ObjectSubclass<imp::SocketTrenchWindow>)
-        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
+        @extends gtk4::Widget, gtk4::Window, gtk4::ApplicationWindow, libadwaita::ApplicationWindow,
+        @implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl SocketTrenchWindow {
-    pub fn new<P: glib::IsA<gtk::Application>>(application: &P) -> Self {
+    pub fn new<P: glib::object::IsA<gtk4::Application>>(application: &P) -> Self {
         glib::Object::builder()
             .property("application", application)
             .build()

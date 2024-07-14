@@ -1,8 +1,8 @@
-use gtk::prelude::*;
-use adw::subclass::prelude::*;
-use gtk::{gio, glib};
+use gtk4::prelude::*;
+use libadwaita::subclass::prelude::*;
+use gtk4::{gio, glib};
 
-use crate::config::VERSION;
+use crate::config::*;
 use crate::SocketTrenchWindow;
 
 mod imp {
@@ -15,7 +15,7 @@ mod imp {
     impl ObjectSubclass for SocketTrenchApplication {
         const NAME: &'static str = "SocketTrenchApplication";
         type Type = super::SocketTrenchApplication;
-        type ParentType = adw::Application;
+        type ParentType = libadwaita::Application;
     }
 
     impl ObjectImpl for SocketTrenchApplication {
@@ -46,7 +46,7 @@ mod imp {
 
 glib::wrapper! {
     pub struct SocketTrenchApplication(ObjectSubclass<imp::SocketTrenchApplication>)
-        @extends gio::Application, gtk::Application, adw::Application,
+        @extends gio::Application, gtk4::Application, libadwaita::Application,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
@@ -70,14 +70,17 @@ impl SocketTrenchApplication {
 
     fn show_about(&self) {
         let window = self.active_window().unwrap();
-        let about = adw::AboutWindow::builder()
+        let about = libadwaita::AboutWindow::builder()
             .transient_for(&window)
-            .application_name("socket_trench")
+            .application_name(GETTEXT_PACKAGE)
             .application_icon("com.joao_arthur.socket_trench")
-            .developer_name("Unknown")
+            .website("https://github.com/joao-arthur/socket_trench")
+            .issue_url("https://github.com/joao-arthur/socket_trench/issues")
+            .developer_name("João Arthur")
             .version(VERSION)
-            .developers(vec!["Unknown"])
-            .copyright("© 2024 Unknown")
+            .developers(vec!["João Arthur <joao.lothamer@gmail.com>"])
+            .copyright("© 2024 João Arthur")
+            .license_type(gtk4::License::Agpl30Only)
             .build();
 
         about.present();

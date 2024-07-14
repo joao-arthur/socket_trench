@@ -2,3 +2,4 @@ data/com.joao_arthur.socket_trench.desktop.in
 data/com.joao_arthur.socket_trench.metainfo.xml.in
 data/com.joao_arthur.socket_trench.gschema.xml
 src/window.ui
+src/gtk/help-overlay.ui
