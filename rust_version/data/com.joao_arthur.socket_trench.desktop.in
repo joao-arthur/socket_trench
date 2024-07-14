@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=socket_trench
+Exec=socket_trench
+Icon=com.joao_arthur.socket_trench
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true
