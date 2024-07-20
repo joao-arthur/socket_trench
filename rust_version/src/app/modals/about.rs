@@ -20,7 +20,7 @@ impl SimpleComponent for Model {
     view! {
         adw::AboutWindow {
             set_application_icon: app::APP_ID,
-            set_application_name: "socket_trench",
+            set_application_name: "Socket Trench",
             set_developer_name: "João Arthur",
             set_version: "1.0.0",
             set_website: "https://github.com/joao-arthur/socket_trench",

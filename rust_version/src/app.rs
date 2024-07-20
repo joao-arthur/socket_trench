@@ -1,5 +1,6 @@
 use gtk::prelude::*;
 use relm4::prelude::*;
+use rust_i18n::t;
 
 mod actions;
 mod content;
@@ -14,8 +15,6 @@ pub struct AppModel {
 
 #[derive(Debug)]
 pub enum AppInput {
-    ShowPreferencesWindow,
-    ShowHelpWindow,
     ShowAboutWindow,
 }
 
@@ -31,9 +30,7 @@ impl SimpleComponent for AppModel {
     menu! {
         primary_menu: {
             section! {
-                "Preferences" => actions::ShowPreferences,
-                "Help" => actions::ShowHelp,
-                "About" => actions::ShowAbout,
+                &t!("about") => actions::ShowAbout,
             },
         }
     }
@@ -71,28 +68,9 @@ impl SimpleComponent for AppModel {
     }
 
     fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
-        use modals::{about, help, preferences};
+        use modals::about;
 
         match message {
-            Self::Input::ShowPreferencesWindow => {
-                let app = relm4::main_application();
-                let main_window = app
-                    .windows()
-                    .first()
-                    .expect(
-                        "Event should have been triggered by last focused window, thus first item",
-                    )
-                    .clone();
-                let preferences_window = preferences::Model::builder()
-                    .transient_for(&main_window)
-                    .launch(preferences::Init)
-                    .detach();
-                preferences_window.widget().present();
-            }
-            Self::Input::ShowHelpWindow => {
-                let help_window = help::Model::builder().launch(help::Init).detach();
-                help_window.widget().present();
-            }
             Self::Input::ShowAboutWindow => {
                 let app = relm4::main_application();
                 let main_window = app
