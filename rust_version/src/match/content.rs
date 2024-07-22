@@ -2,18 +2,9 @@ use relm4::adw::prelude::*;
 use relm4::prelude::*;
 pub struct ContentModel;
 pub struct ContentInit;
-use relm4::{adw, gtk, AsyncFactorySender};
-
 
 #[derive(Debug)]
-pub enum ContentInput {
-    CreateMatch,
-    ConnectMatch,
-}
-
-relm4::new_action_group!(pub ContentActions, "content");
-relm4::new_stateless_action!(pub CreateMatch, ContentActions, "creatematch");
-
+pub enum ContentInput {}
 
 #[derive(Debug)]
 pub enum ContentOutput {}
@@ -50,9 +41,7 @@ impl SimpleComponent for ContentModel {
                     add_suffix = &gtk::Image {
                         set_icon_name: Some("go-next-symbolic")
                     },
-                connect_activated[sender] => move |_| {
-                    sender.input(ContentInput::CreateMatch);
-                },
+                    set_action
                 },
             },
         }
@@ -61,17 +50,14 @@ impl SimpleComponent for ContentModel {
     fn init(
         _init: Self::Init,
         root: &Self::Root,
-       sender: ComponentSender<Self>,
+        _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = Self;
         let widgets = view_output!();
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
-        match message {
-            ContentInput::CreateMatch => println!("CreateMatch"),
-            ContentInput::ConnectMatch => println!("ConnectMatch"), 
-        }
+    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
+        match message {}
     }
 }

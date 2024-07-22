@@ -4,7 +4,7 @@ use rust_i18n::t;
 
 mod actions;
 mod content;
-mod modals;
+mod about;
 mod settings;
 
 pub const APP_ID: &str = "com.joao_arthur.socket_trench";
@@ -39,6 +39,7 @@ impl SimpleComponent for AppModel {
         main_window = adw::ApplicationWindow {
             set_title: Some("Socket Trench"),
             add_css_class: "devel",
+
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
                 adw::HeaderBar {
@@ -68,7 +69,7 @@ impl SimpleComponent for AppModel {
     }
 
     fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
-        use modals::about;
+        use about;
 
         match message {
             Self::Input::ShowAboutWindow => {
@@ -76,9 +77,7 @@ impl SimpleComponent for AppModel {
                 let main_window = app
                     .windows()
                     .first()
-                    .expect(
-                        "Event should have been triggered by last focused window, thus first item",
-                    )
+                    .expect("Event should have been triggered by last focused window")
                     .clone();
                 let about_window = about::Model::builder()
                     .transient_for(&main_window)

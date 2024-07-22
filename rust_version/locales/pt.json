@@ -1,5 +1,6 @@
 {
     "_version": 1,
-    "hello_world": "Olá, mundo!",
-    "about": "Sobre o Socket Trench"
+    "about": "Sobre o Socket Trench",
+    "mainmanu.new": "Criar partida",
+    "mainmenu.connect": "Conectar à partida"
 }
