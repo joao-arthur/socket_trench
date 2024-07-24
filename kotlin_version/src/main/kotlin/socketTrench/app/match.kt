@@ -1,17 +1,21 @@
 package socketTrench.app
 
+import socketTrench.engine.*
+import socketTrench.events.DefaultDispatcher
+import socketTrench.events.Observer
+import socketTrench.gui.GUIScreen
+import socketTrench.gui.goTo
+import socketTrench.matchScene.*
+import socketTrench.socket.SocketManager
+import socketTrench.socket.SocketMessages
+import socketTrench.socket.closeConnection
+import socketTrench.socket.getConnection
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JFrame
 import javax.swing.JPanel
-import socketTrench.engine.*
-import socketTrench.events.*
-import socketTrench.events.Observer
-import socketTrench.gui.*
-import socketTrench.matchScene.*
-import socketTrench.socket.*
 
 object MatchMessages {
     const val MOVE = "M"
@@ -87,7 +91,7 @@ class MatchRenderObserver(private val player: Player, private val opponent: Play
 
 internal class MatchPanel(private val engineRenderer: EngineRenderer) : JPanel(), Observer {
     init {
-        setPreferredSize(Dimension(Screen.WIDTH, Screen.HEIGHT))
+        preferredSize = Dimension(Screen.WIDTH, Screen.HEIGHT)
     }
 
     override fun paintComponent(graphics: Graphics) {
@@ -109,7 +113,7 @@ class MatchInputHandler : InputHandler {
         }
     }
 
-    override fun onKeyReleased(keyCode: Int) { }
+    override fun onKeyReleased(keyCode: Int) {}
 }
 
 internal class MatchScreen(
@@ -121,11 +125,11 @@ internal class MatchScreen(
     init {
         frame.add(panel)
         frame.pack()
-        frame.setTitle("Match | Socket Trench")
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+        frame.title = "Match | Socket Trench"
+        frame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
         frame.setLocationRelativeTo(null)
-        frame.setResizable(false)
-        frame.setVisible(true)
+        frame.isResizable = false
+        frame.isVisible = true
         frame.addKeyListener(keyListener)
     }
 

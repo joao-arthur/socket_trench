@@ -1,10 +1,9 @@
 package socketTrench.matchScene
 
-import java.awt.event.KeyEvent
-import kotlin.collections.MutableList
-import socketTrench.engine.*
 import socketTrench.app.Screen
+import socketTrench.engine.*
 import socketTrench.imageLoader.loadImageFromPath
+import java.awt.event.KeyEvent
 
 interface Player : GameObject {
     fun shoot(engineState: EngineState)
@@ -31,7 +30,7 @@ internal class ShootGameObject(
 ) : DefaultGameObject() {
     init {
         setBody(BoxDim(x, y, 4, 2))
-        setCollider(BoxDim(x, y, 4, 2))
+        setCollider(getBody()!!)
         setForce(Point(speedX, 0))
         setTexture(loadImageFromPath("shoot.png"))
     }
@@ -47,7 +46,7 @@ class Player1GameObject(canInput: Boolean) : DefaultGameObject(), Player {
 
     init {
         setBody(BoxDim(0, 100, 58, 30))
-        setCollider(BoxDim(0, 100, 58, 30))
+        setCollider(getBody()!!)
         setTexture(loadImageFromPath("player1.png"))
         setForce(Point(0, 0))
         setBounds(BoxPos(0, 0, 158, Screen.HEIGHT))
@@ -71,6 +70,7 @@ class Player1GameObject(canInput: Boolean) : DefaultGameObject(), Player {
     }
 
     override fun onCollideWith(other: GameObject, engineState: EngineState) {
+        println("onCollideWith")
         engineState.destroy(other)
         lifePoints -= 1
     }
@@ -98,7 +98,7 @@ internal class Player1InputHandler(private var player1: Player1GameObject) : Inp
 class Player2GameObject(canInput: Boolean) : DefaultGameObject(), Player {
     init {
         setBody(BoxDim(Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30, 58, 30))
-        setCollider(BoxDim(Screen.WIDTH - 58, Screen.HEIGHT - 100 - 30, 58, 30))
+        setCollider(getBody()!!)
         setTexture(loadImageFromPath("player2.png"))
         setForce(Point(0, 0))
         setBounds(BoxPos(Screen.WIDTH - 158, 0, Screen.WIDTH, Screen.HEIGHT))

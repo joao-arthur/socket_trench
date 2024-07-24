@@ -3,7 +3,7 @@ package socketTrench.engine
 import org.junit.Test
 import kotlin.test.assertEquals
 
-public class EngineTest {
+class EngineTest {
     @Test
     fun BoxDimTest() {
         val boxDim = BoxDim(1, 2, 3, 4)

@@ -1,21 +1,20 @@
 package socketTrench.engine
 
-import kotlin.collections.MutableList
 import socketTrench.app.Screen
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
+import socketTrench.events.DefaultDispatcher
 import java.awt.Graphics
 import java.awt.Graphics2D
-import java.awt.image.BufferedImage
-import socketTrench.events.DefaultDispatcher
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.awt.image.BufferedImage
+import java.util.*
+import kotlin.concurrent.fixedRateTimer
 
-class EngineKeyAdapter(private val gameObjects: MutableList<GameObject>, private val engineState: EngineState) : KeyListener {
+class EngineKeyAdapter(private val gameObjects: MutableList<GameObject>, private val engineState: EngineState) :
+    KeyListener {
     private var keys: MutableSet<Int> = HashSet()
 
-    override fun keyTyped(event: KeyEvent) { }
+    override fun keyTyped(event: KeyEvent) {}
 
     override fun keyPressed(event: KeyEvent) {
         val keyCode: Int = event.keyCode
@@ -101,9 +100,9 @@ abstract class DefaultGameObject : GameObject {
     }
 }
 
-data class BoxDim(var x: Int, var y: Int, var w: Int, var h: Int);
-data class BoxPos(var x1: Int, var y1: Int, var x2: Int, var y2: Int);
-data class Point(var x: Int, var y: Int);
+data class BoxDim(var x: Int, var y: Int, var w: Int, var h: Int)
+data class BoxPos(var x1: Int, var y1: Int, var x2: Int, var y2: Int)
+data class Point(var x: Int, var y: Int)
 
 interface GameObject {
     fun getBody(): BoxDim?
@@ -144,34 +143,6 @@ class EngineRenderer(private val gameObjects: MutableList<GameObject>) {
     }
 }
 
-internal object EnginePhysics {
-    fun apply(gameObject: GameObject) {
-        val body = gameObject.getBody()!!
-        val force = gameObject.getForce()
-        val bounds = gameObject.getBounds()
-        if (force == null) {
-            return
-        }
-        body.x += force.x
-        body.y += force.y
-        if (bounds == null) {
-            return
-        }
-        if (body.x < bounds.x1) {
-            body.x = bounds.x1
-        }
-        if (body.x > bounds.x2 - body.w) {
-            body.x = bounds.x2 - body.w
-        }
-        if (body.y < bounds.y1) {
-            body.y = bounds.y1
-        }
-        if (body.y > bounds.y2 - body.h) {
-            body.y = bounds.y2 - body.h
-        }
-    }
-}
-
 class EngineState(private val gameObjects: MutableList<GameObject>) {
     private val createList = mutableListOf<GameObject>()
     private val deleteList = mutableListOf<GameObject>()
@@ -196,8 +167,64 @@ class EngineState(private val gameObjects: MutableList<GameObject>) {
     }
 }
 
+internal fun applyPhysics(gameObject: GameObject) {
+    val body = gameObject.getBody()
+    val force = gameObject.getForce()
+    val bounds = gameObject.getBounds()
+    if (body == null) {
+        return
+    }
+    if (force == null) {
+        return
+    }
+    body.x += force.x
+    body.y += force.y
+    if (bounds == null) {
+        return
+    }
+    if (body.x < bounds.x1) {
+        body.x = bounds.x1
+    }
+    if (body.x > bounds.x2 - body.w) {
+        body.x = bounds.x2 - body.w
+    }
+    if (body.y < bounds.y1) {
+        body.y = bounds.y1
+    }
+    if (body.y > bounds.y2 - body.h) {
+        body.y = bounds.y2 - body.h
+    }
+}
+
+internal fun applyCollisions(gameObjects: MutableList<GameObject>, engineState: EngineState) {
+    for (gameObject in gameObjects) {
+        val collider = gameObject.getCollider()
+        if (collider != null) {
+            for (other in gameObjects) {
+                if (gameObject != other) {
+                    val otherBody = other.getCollider()
+                    if (otherBody != null) {
+                        if (
+                            collider.x < otherBody.x + otherBody.w &&
+                            collider.x + collider.w > otherBody.x &&
+                            collider.y < otherBody.y + otherBody.h &&
+                            collider.y + collider.h > otherBody.y
+                        ) {
+                            gameObject.onCollideWith(other, engineState)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 object EngineMessages {
     const val RENDER = "RENDER"
+}
+
+internal object EngineConstants {
+    const val FPS = 60
 }
 
 class EngineManager(
@@ -205,18 +232,18 @@ class EngineManager(
     private val engineState: EngineState,
     private val dispatcher: DefaultDispatcher
 ) {
+    private lateinit var timer: Timer
+
     fun onInit() {
-        val scheduler: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
-        val task = Runnable {
+        timer = fixedRateTimer("timer", initialDelay = 0, period = (1000 / EngineConstants.FPS).toLong()) {
             onUpdate()
         }
-        scheduler.scheduleAtFixedRate(task, 0, (1000 / FPS).toLong(), TimeUnit.MILLISECONDS)
     }
 
     private fun onUpdate() {
         engineState.apply()
         for (gameObject in gameObjects) {
-            EnginePhysics.apply(gameObject)
+            applyPhysics(gameObject)
         }
         for (gameObject in gameObjects) {
             val body = gameObject.getBody()
@@ -227,26 +254,7 @@ class EngineManager(
                 }
             }
         }
-        for (gameObject in gameObjects) {
-            val collider = gameObject.getCollider()
-            if (collider != null) {
-                for (other in gameObjects) {
-                    if (gameObject != other) {
-                        val otherBody = other.getCollider()
-                        if (otherBody != null) {
-                            if (collider.x < otherBody.x + otherBody.w && collider.x + collider.w > otherBody.x && collider.y < otherBody.y + otherBody.h && collider.y + collider.h > otherBody.y
-                            ) {
-                                gameObject.onCollideWith(other, engineState)
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        applyCollisions(gameObjects, engineState)
         dispatcher.dispatch(EngineMessages.RENDER)
-    }
-
-    companion object {
-        private const val FPS = 30
     }
 }

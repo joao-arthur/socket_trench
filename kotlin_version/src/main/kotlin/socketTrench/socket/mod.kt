@@ -2,13 +2,13 @@ package socketTrench.socket
 
 import java.io.IOException
 import java.io.PrintStream
+import java.net.BindException
+import java.net.ConnectException
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.*
 import java.util.logging.Level
 import java.util.logging.Logger
-import java.net.ConnectException
-import java.net.BindException
 
 interface SocketManager {
     fun handleMessage(message: String)
@@ -60,7 +60,7 @@ class SocketService {
         val socket = this.socket
         val serverSocket = this.serverSocket
         val manager = this.manager
-        if(
+        if (
             input == null ||
             output == null ||
             socket == null ||
