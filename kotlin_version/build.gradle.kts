@@ -19,6 +19,5 @@ java {
 }
 
 application {
-    mainClass.set("SocketTrench.AppKt")
-
+    mainClass.set("socketTrench.MainKt")
 }
