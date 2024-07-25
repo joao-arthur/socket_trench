@@ -1,19 +1,18 @@
 use relm4::adw::prelude::*;
 use relm4::prelude::*;
+use relm4::{adw, gtk};
+
+relm4::new_action_group!(pub ContentActions, "content");
+relm4::new_stateless_action!(pub CreateMatch, ContentActions, "creatematch");
+
 pub struct ContentModel;
 pub struct ContentInit;
-use relm4::{adw, gtk, AsyncFactorySender};
-
 
 #[derive(Debug)]
 pub enum ContentInput {
     CreateMatch,
     ConnectMatch,
 }
-
-relm4::new_action_group!(pub ContentActions, "content");
-relm4::new_stateless_action!(pub CreateMatch, ContentActions, "creatematch");
-
 
 #[derive(Debug)]
 pub enum ContentOutput {}
@@ -43,6 +42,9 @@ impl SimpleComponent for ContentModel {
                     add_suffix = &gtk::Image {
                         set_icon_name: Some("go-next-symbolic")
                     },
+                    connect_activated[sender] => move |_| {
+                        sender.input(ContentInput::CreateMatch);
+                    },
                 },
                 adw::ActionRow {
                     set_title: "Conectar à partida",
@@ -50,9 +52,9 @@ impl SimpleComponent for ContentModel {
                     add_suffix = &gtk::Image {
                         set_icon_name: Some("go-next-symbolic")
                     },
-                connect_activated[sender] => move |_| {
-                    sender.input(ContentInput::CreateMatch);
-                },
+                    connect_activated[sender] => move |_| {
+                        sender.input(ContentInput::ConnectMatch);
+                    },
                 },
             },
         }
@@ -61,17 +63,17 @@ impl SimpleComponent for ContentModel {
     fn init(
         _init: Self::Init,
         root: &Self::Root,
-       sender: ComponentSender<Self>,
+        sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = Self;
         let widgets = view_output!();
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
+    fn update(&mut self, message: Self::Input, _: ComponentSender<Self>) {
         match message {
             ContentInput::CreateMatch => println!("CreateMatch"),
-            ContentInput::ConnectMatch => println!("ConnectMatch"), 
+            ContentInput::ConnectMatch => println!("ConnectMatch"),
         }
     }
 }

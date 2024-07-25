@@ -2,6 +2,7 @@ use relm4::prelude::*;
 use sys_locale::get_locale;
 
 mod app;
+mod idle_client;
 
 rust_i18n::i18n!("locales", fallback = "en-US");
 

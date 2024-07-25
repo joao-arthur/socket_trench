@@ -2,9 +2,11 @@ use gtk::prelude::*;
 use relm4::prelude::*;
 use rust_i18n::t;
 
+use crate::idle_client;
+
+mod about;
 mod actions;
 mod content;
-mod about;
 mod settings;
 
 pub const APP_ID: &str = "com.joao_arthur.socket_trench";
@@ -73,22 +75,24 @@ impl SimpleComponent for AppModel {
 
         match message {
             Self::Input::ShowAboutWindow => {
-                let app = relm4::main_application();
-                let main_window = app
-                    .windows()
-                    .first()
-                    .expect("Event should have been triggered by last focused window")
-                    .clone();
-                let about_window = about::Model::builder()
-                    .transient_for(&main_window)
-                    .launch(about::Init)
-                    .detach();
-                about_window.widget().present();
+               // let app = relm4::main_application();
+               // let main_window = app
+               //     .windows()
+               //     .first()
+               //     .expect("Event must be triggered by last focused window")
+               //     .clone();
+               // let about_window = about::Model::builder()
+               //     .transient_for(&main_window)
+               //     .launch(about::Init)
+               //     .detach();
+               // about_window.widget().present();
+                idle_client::IdleClientModel::builder().launch(idle_client::IdleClientInit).widget().present();
             }
         }
     }
 
     fn shutdown(&mut self, widgets: &mut Self::Widgets, _output: relm4::Sender<Self::Output>) {
+        println!("barbaridade");
         Self::save_window_state(&widgets);
     }
 }
