@@ -1,30 +1,30 @@
 use relm4::prelude::*;
 
-use crate::app;
+use crate::constants;
 
-pub struct Model;
-pub struct Init;
-
-#[derive(Debug)]
-pub enum Input {}
+pub struct AboutModel;
+pub struct AboutInit;
 
 #[derive(Debug)]
-pub enum Output {}
+pub enum AboutInput {}
+
+#[derive(Debug)]
+pub enum AboutOutput {}
 
 #[relm4::component(pub)]
-impl SimpleComponent for Model {
-    type Init = Init;
-    type Input = Input;
-    type Output = Output;
+impl SimpleComponent for AboutModel {
+    type Init = AboutInit;
+    type Input = AboutInput;
+    type Output = AboutOutput;
 
     view! {
         adw::AboutWindow {
-            set_application_icon: app::APP_ID,
-            set_application_name: "Socket Trench",
-            set_developer_name: "João Arthur",
-            set_version: "1.0.0",
-            set_website: "https://github.com/joao-arthur/socket_trench",
-            set_issue_url: "https://github.com/joao-arthur/socket_trench/issues",
+            set_application_icon: constants::APP_ID,
+            set_application_name: constants::APP_NAME,
+            set_developer_name: constants::APP_DEVELOPER,
+            set_version: constants::APP_VERSION,
+            set_website: constants::APP_URL,
+            set_issue_url: constants::APP_ISSUE_URL,
             set_developers: &["João Arthur <joao.lothamer@gmail.com>"],
             set_copyright: "© 2024 João Arthur",
             set_license_type: gtk::License::Agpl30Only

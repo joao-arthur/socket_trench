@@ -1,27 +1,27 @@
 use relm4::adw::prelude::*;
 use relm4::prelude::*;
-use relm4::{adw, gtk};
 
-relm4::new_action_group!(pub ContentActions, "content");
-relm4::new_stateless_action!(pub CreateMatch, ContentActions, "creatematch");
+relm4::new_action_group!(pub MainMenuActions, "content");
+relm4::new_stateless_action!(pub CreateMatch, MainMenuActions, "create_match");
+relm4::new_stateless_action!(pub ConnectMatch, MainMenuActions, "connect_match");
 
-pub struct ContentModel;
-pub struct ContentInit;
+pub struct MainMenuModel;
+pub struct MainMenuInit;
 
 #[derive(Debug)]
-pub enum ContentInput {
+pub enum MainMenuInput {
     CreateMatch,
     ConnectMatch,
 }
 
 #[derive(Debug)]
-pub enum ContentOutput {}
+pub enum MainMenuOutput {}
 
 #[relm4::component(pub)]
-impl SimpleComponent for ContentModel {
-    type Init = ContentInit;
-    type Input = ContentInput;
-    type Output = ContentOutput;
+impl SimpleComponent for MainMenuModel {
+    type Init = MainMenuInit;
+    type Input = MainMenuInput;
+    type Output = MainMenuOutput;
 
     view! {
         #[root]
@@ -43,7 +43,7 @@ impl SimpleComponent for ContentModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.input(ContentInput::CreateMatch);
+                        sender.input(MainMenuInput::CreateMatch);
                     },
                 },
                 adw::ActionRow {
@@ -53,7 +53,7 @@ impl SimpleComponent for ContentModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.input(ContentInput::ConnectMatch);
+                        sender.input(MainMenuInput::ConnectMatch);
                     },
                 },
             },
@@ -67,13 +67,14 @@ impl SimpleComponent for ContentModel {
     ) -> ComponentParts<Self> {
         let model = Self;
         let widgets = view_output!();
+
         ComponentParts { model, widgets }
     }
 
     fn update(&mut self, message: Self::Input, _: ComponentSender<Self>) {
         match message {
-            ContentInput::CreateMatch => println!("CreateMatch"),
-            ContentInput::ConnectMatch => println!("ConnectMatch"),
+            MainMenuInput::CreateMatch => println!("CreateMatch"),
+            MainMenuInput::ConnectMatch => println!("ConnectMatch"),
         }
     }
 }

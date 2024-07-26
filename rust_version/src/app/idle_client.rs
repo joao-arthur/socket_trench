@@ -1,9 +1,9 @@
 use gtk::prelude::*;
 use relm4::prelude::*;
 
-pub struct IdleClientModel {}
+pub struct IdleClientModel;
 
-pub struct IdleClientInit {}
+pub struct IdleClientInit;
 
 #[derive(Debug)]
 pub struct IdleClientInput {}
@@ -13,14 +13,14 @@ pub struct IdleClientOutput {}
 
 #[relm4::component(pub)]
 impl SimpleComponent for IdleClientModel {
-    type Init = ();
+    type Init = IdleClientInit;
     type Input = IdleClientInput;
     type Output = IdleClientOutput;
 
     fn init(
-        init: Self::Init,
+        _init: Self::Init,
         root: &Self::Root,
-        sender: ComponentSender<Self>,
+        _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = IdleClientModel {};
         let widgets = view_output!();
@@ -32,7 +32,9 @@ impl SimpleComponent for IdleClientModel {
 
     view! {
         gtk::Label {
-            set_label: "Diacho"
+            set_label: "Socket Trench",
+            set_margin_all: 32,
+            set_css_classes: &["title-1"],
         }
     }
 }
