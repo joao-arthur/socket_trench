@@ -1,7 +1,7 @@
 use super::{
     about::{AboutInit, AboutModel},
     idle_client::{IdleClientInit, IdleClientModel},
-    main_menu::{MainMenuInit, MainMenuModel},
+    main_menu::{MainMenuInit, MainMenuModel, MainMenuOutput},
 };
 use gtk::prelude::*;
 use libadwaita::prelude::NavigationPageExt;
@@ -12,6 +12,7 @@ relm4::new_action_group!(pub WindowActions, "app");
 relm4::new_stateless_action!(pub ShowAboutWindow, WindowActions, "about");
 
 pub struct WindowModel {
+    view: adw::NavigationView,
     main_menu: Controller<MainMenuModel>,
     idle_client: Controller<IdleClientModel>,
 }
@@ -21,6 +22,8 @@ pub struct WindowInit;
 #[derive(Debug)]
 pub enum WindowInput {
     ShowAboutWindow,
+    CreateMatch,
+ConnectMatch,
 }
 
 #[derive(Debug)]
@@ -54,10 +57,9 @@ impl SimpleComponent for WindowModel {
                         set_menu_model: Some(&primary_menu),
                     },
                 },
-                #[name = "navpage"]
-                adw::NavigationView { }
-
-
+                
+                #[local_ref]
+                view  -> adw::NavigationView {},              
             },
         }
     }
@@ -67,9 +69,16 @@ impl SimpleComponent for WindowModel {
         window: &Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let main_menu = MainMenuModel::builder().launch(MainMenuInit).detach();
+        let main_menu = MainMenuModel::builder()
+        .launch(MainMenuInit)
+        .forward(sender.input_sender(), |output| match output {
+                MainMenuOutput::CreateMatch => WindowInput::CreateMatch,
+                MainMenuOutput::ConnectMatch => WindowInput::ConnectMatch,
+            });
         let idle_client = IdleClientModel::builder().launch(IdleClientInit).detach();
+        let view = adw::NavigationView::builder().build();
         let model = WindowModel {
+            view: view.clone(),
             main_menu,
             idle_client,
         };
@@ -78,7 +87,7 @@ impl SimpleComponent for WindowModel {
        
         let nav = adw::NavigationPage::builder().child(model.main_menu.widget()).build();
 
-        widgets.navpage.push(&nav);
+        view.push(&nav);
        
         ComponentParts { model, widgets }
     }
@@ -108,7 +117,20 @@ impl SimpleComponent for WindowModel {
                 //    .launch(idle_client::IdleClientInit)
                 //    .widget()
                 //    .present();
-            }
+            },
+            Self::Input::CreateMatch => {
+                 let app = relm4::main_application();
+                let main_window = app
+                    .windows()
+                    .first()
+                    .unwrap()
+                    .clone();
+
+                let nav = adw::NavigationPage::builder().child(IdleClientModel::builder().launch(IdleClientInit).detach().widget()).build();
+                self.view.clone().push(&nav);
+            },
+            Self::Input::ConnectMatch => {
+            },
         }
     }
 }

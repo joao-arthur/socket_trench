@@ -15,7 +15,10 @@ pub enum MainMenuInput {
 }
 
 #[derive(Debug)]
-pub enum MainMenuOutput {}
+pub enum MainMenuOutput {
+    CreateMatch,
+    ConnectMatch,    
+}
 
 #[relm4::component(pub)]
 impl SimpleComponent for MainMenuModel {
@@ -43,7 +46,7 @@ impl SimpleComponent for MainMenuModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.input(MainMenuInput::CreateMatch);
+                        sender.output(MainMenuOutput::CreateMatch).unwrap();
                     },
                 },
                 adw::ActionRow {
