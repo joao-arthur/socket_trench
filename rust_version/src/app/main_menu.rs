@@ -1,29 +1,18 @@
 use relm4::adw::prelude::*;
 use relm4::prelude::*;
 
-relm4::new_action_group!(pub MainMenuActions, "content");
-relm4::new_stateless_action!(pub CreateMatch, MainMenuActions, "create_match");
-relm4::new_stateless_action!(pub ConnectMatch, MainMenuActions, "connect_match");
-
 pub struct MainMenuModel;
-pub struct MainMenuInit;
-
-#[derive(Debug)]
-pub enum MainMenuInput {
-    CreateMatch,
-    ConnectMatch,
-}
 
 #[derive(Debug)]
 pub enum MainMenuOutput {
     CreateMatch,
-    ConnectMatch,    
+    ConnectMatch,
 }
 
 #[relm4::component(pub)]
 impl SimpleComponent for MainMenuModel {
-    type Init = MainMenuInit;
-    type Input = MainMenuInput;
+    type Init = ();
+    type Input = ();
     type Output = MainMenuOutput;
 
     view! {
@@ -56,7 +45,7 @@ impl SimpleComponent for MainMenuModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.input(MainMenuInput::ConnectMatch);
+                        sender.output(MainMenuOutput::ConnectMatch).unwrap();
                     },
                 },
             },
@@ -74,10 +63,5 @@ impl SimpleComponent for MainMenuModel {
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, _: ComponentSender<Self>) {
-        match message {
-            MainMenuInput::CreateMatch => println!("CreateMatch"),
-            MainMenuInput::ConnectMatch => println!("ConnectMatch"),
-        }
-    }
+    fn update(&mut self, message: Self::Input, _: ComponentSender<Self>) {}
 }

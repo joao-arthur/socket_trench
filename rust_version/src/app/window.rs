@@ -1,7 +1,7 @@
 use super::{
     about::{AboutInit, AboutModel},
     idle_client::{IdleClientInit, IdleClientModel},
-    main_menu::{MainMenuInit, MainMenuModel, MainMenuOutput},
+    main_menu::{MainMenuModel, MainMenuOutput},
 };
 use gtk::prelude::*;
 use libadwaita::prelude::NavigationPageExt;
@@ -17,13 +17,11 @@ pub struct WindowModel {
     idle_client: Controller<IdleClientModel>,
 }
 
-pub struct WindowInit;
-
 #[derive(Debug)]
 pub enum WindowInput {
     ShowAboutWindow,
     CreateMatch,
-ConnectMatch,
+    ConnectMatch,
 }
 
 #[derive(Debug)]
@@ -31,7 +29,7 @@ pub enum WindowOutput {}
 
 #[relm4::component(pub)]
 impl SimpleComponent for WindowModel {
-    type Init = WindowInit;
+    type Init = ();
     type Input = WindowInput;
     type Output = WindowOutput;
 
@@ -57,9 +55,9 @@ impl SimpleComponent for WindowModel {
                         set_menu_model: Some(&primary_menu),
                     },
                 },
-                
+
                 #[local_ref]
-                view  -> adw::NavigationView {},              
+                view  -> adw::NavigationView {},
             },
         }
     }
@@ -69,12 +67,13 @@ impl SimpleComponent for WindowModel {
         window: &Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let main_menu = MainMenuModel::builder()
-        .launch(MainMenuInit)
-        .forward(sender.input_sender(), |output| match output {
+        let main_menu = MainMenuModel::builder().launch(()).forward(
+            sender.input_sender(),
+            |output| match output {
                 MainMenuOutput::CreateMatch => WindowInput::CreateMatch,
                 MainMenuOutput::ConnectMatch => WindowInput::ConnectMatch,
-            });
+            },
+        );
         let idle_client = IdleClientModel::builder().launch(IdleClientInit).detach();
         let view = adw::NavigationView::builder().build();
         let model = WindowModel {
@@ -84,11 +83,14 @@ impl SimpleComponent for WindowModel {
         };
         let widgets = view_output!();
         Self::create_actions(&widgets, &sender);
-       
-        let nav = adw::NavigationPage::builder().child(model.main_menu.widget()).build();
+
+        let nav = adw::NavigationPage::builder()
+            .title("Main menu")
+            .child(model.main_menu.widget())
+            .build();
 
         view.push(&nav);
-       
+
         ComponentParts { model, widgets }
     }
 
@@ -103,11 +105,7 @@ impl SimpleComponent for WindowModel {
         match message {
             Self::Input::ShowAboutWindow => {
                 let app = relm4::main_application();
-                let main_window = app
-                    .windows()
-                    .first()
-                    .unwrap()
-                    .clone();
+                let main_window = app.windows().first().unwrap().clone();
                 let about_window = AboutModel::builder()
                     .transient_for(&main_window)
                     .launch(AboutInit)
@@ -117,20 +115,23 @@ impl SimpleComponent for WindowModel {
                 //    .launch(idle_client::IdleClientInit)
                 //    .widget()
                 //    .present();
-            },
+            }
             Self::Input::CreateMatch => {
-                 let app = relm4::main_application();
-                let main_window = app
-                    .windows()
-                    .first()
-                    .unwrap()
-                    .clone();
+                let app = relm4::main_application();
+                let main_window = app.windows().first().unwrap().clone();
 
-                let nav = adw::NavigationPage::builder().child(IdleClientModel::builder().launch(IdleClientInit).detach().widget()).build();
+                let nav = adw::NavigationPage::builder()
+                    .title("Idle Client")
+                    .child(
+                        IdleClientModel::builder()
+                            .launch(IdleClientInit)
+                            .detach()
+                            .widget(),
+                    )
+                    .build();
                 self.view.clone().push(&nav);
-            },
-            Self::Input::ConnectMatch => {
-            },
+            }
+            Self::Input::ConnectMatch => {}
         }
     }
 }
