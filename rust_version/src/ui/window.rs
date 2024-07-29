@@ -1,42 +1,41 @@
 use super::{
-    about::{AboutInit, AboutModel},
-    idle_client::{IdleClientInit, IdleClientModel},
+    about::AboutModel,
+    idle_client::{IdleClientModel, IdleClientOutput},
+    idle_server::{IdleServerModel, IdleServerOutput},
     main_menu::{MainMenuModel, MainMenuOutput},
+    match_play::MatchPlayModel,
 };
 use gtk::prelude::*;
-use libadwaita::prelude::NavigationPageExt;
 use relm4::prelude::*;
 use rust_i18n::t;
 
 relm4::new_action_group!(pub WindowActions, "app");
-relm4::new_stateless_action!(pub ShowAboutWindow, WindowActions, "about");
+relm4::new_stateless_action!(pub GoToAboutWindow, WindowActions, "about");
 
 pub struct WindowModel {
     view: adw::NavigationView,
     main_menu: Controller<MainMenuModel>,
-    idle_client: Controller<IdleClientModel>,
 }
 
 #[derive(Debug)]
 pub enum WindowInput {
-    ShowAboutWindow,
-    CreateMatch,
-    ConnectMatch,
+    GoToAboutWindow,
+    GoToCreateClient,
+    GoToCreateServer,
+    GoToClientMatch,
+    GoToServerMatch,
 }
-
-#[derive(Debug)]
-pub enum WindowOutput {}
 
 #[relm4::component(pub)]
 impl SimpleComponent for WindowModel {
     type Init = ();
     type Input = WindowInput;
-    type Output = WindowOutput;
+    type Output = ();
 
     menu! {
         primary_menu: {
             section! {
-                &t!("about") => ShowAboutWindow,
+                &t!("about") => GoToAboutWindow,
             },
         }
     }
@@ -44,7 +43,7 @@ impl SimpleComponent for WindowModel {
     view! {
         main_window = adw::ApplicationWindow {
             add_css_class: "devel",
-            set_default_size: (1024, 600),
+            set_default_size: (700, 500),
             set_title: Some("Socket Trench"),
 
             gtk::Box {
@@ -70,16 +69,14 @@ impl SimpleComponent for WindowModel {
         let main_menu = MainMenuModel::builder().launch(()).forward(
             sender.input_sender(),
             |output| match output {
-                MainMenuOutput::CreateMatch => WindowInput::CreateMatch,
-                MainMenuOutput::ConnectMatch => WindowInput::ConnectMatch,
+                MainMenuOutput::GoToCreateServer => WindowInput::GoToCreateServer,
+                MainMenuOutput::GoToCreateClient => WindowInput::GoToCreateClient,
             },
         );
-        let idle_client = IdleClientModel::builder().launch(IdleClientInit).detach();
         let view = adw::NavigationView::builder().build();
         let model = WindowModel {
             view: view.clone(),
             main_menu,
-            idle_client,
         };
         let widgets = view_output!();
         Self::create_actions(&widgets, &sender);
@@ -94,44 +91,59 @@ impl SimpleComponent for WindowModel {
         ComponentParts { model, widgets }
     }
 
-    //fn pre_view() {
-    //    match model.page {
-    //        Page::IdleClient => stack.set_visible_child(login_page),
-    //        Page::MainMenu => stack.set_visible_child(main_page),
-    //    }
-    //}
-
-    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
+    fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
         match message {
-            Self::Input::ShowAboutWindow => {
+            Self::Input::GoToAboutWindow => {
                 let app = relm4::main_application();
                 let main_window = app.windows().first().unwrap().clone();
                 let about_window = AboutModel::builder()
                     .transient_for(&main_window)
-                    .launch(AboutInit)
+                    .launch(())
                     .detach();
                 about_window.widget().present();
-                //idle_client::IdleClientModel::builder()
-                //    .launch(idle_client::IdleClientInit)
-                //    .widget()
-                //    .present();
             }
-            Self::Input::CreateMatch => {
-                let app = relm4::main_application();
-                let main_window = app.windows().first().unwrap().clone();
-
+            Self::Input::GoToCreateServer => {
                 let nav = adw::NavigationPage::builder()
-                    .title("Idle Client")
+                    .title("Idle Server")
                     .child(
-                        IdleClientModel::builder()
-                            .launch(IdleClientInit)
-                            .detach()
+                        IdleServerModel::builder()
+                            .launch(())
+                            .forward(sender.input_sender(), |output| match output {
+                                IdleServerOutput::GoToMatch => WindowInput::GoToClientMatch,
+                            })
                             .widget(),
                     )
                     .build();
                 self.view.clone().push(&nav);
             }
-            Self::Input::ConnectMatch => {}
+            Self::Input::GoToCreateClient => {
+                let nav = adw::NavigationPage::builder()
+                    .title("Idle Client")
+                    .child(
+                        IdleClientModel::builder()
+                            .launch(())
+                            .forward(sender.input_sender(), |output| match output {
+                                IdleClientOutput::GoToMatch => WindowInput::GoToServerMatch,
+                            })
+                            .widget(),
+                    )
+                    .build();
+                self.view.clone().push(&nav);
+            }
+            Self::Input::GoToClientMatch => {
+                let nav = adw::NavigationPage::builder()
+                    .title("Idle Client")
+                    .child(MatchPlayModel::builder().launch(()).detach().widget())
+                    .build();
+                self.view.clone().push(&nav);
+            }
+            Self::Input::GoToServerMatch => {
+                let nav = adw::NavigationPage::builder()
+                    .title("Idle Client")
+                    .child(MatchPlayModel::builder().launch(()).detach().widget())
+                    .build();
+                self.view.clone().push(&nav);
+            }
         }
     }
 }
@@ -144,8 +156,8 @@ impl WindowModel {
         let mut app_actions = relm4::actions::RelmActionGroup::<WindowActions>::new();
         let show_about = {
             let sender = sender.clone();
-            relm4::actions::RelmAction::<ShowAboutWindow>::new_stateless(move |_| {
-                sender.input(<Self as SimpleComponent>::Input::ShowAboutWindow);
+            relm4::actions::RelmAction::<GoToAboutWindow>::new_stateless(move |_| {
+                sender.input(<Self as SimpleComponent>::Input::GoToAboutWindow);
             })
         };
         app_actions.add_action(show_about);

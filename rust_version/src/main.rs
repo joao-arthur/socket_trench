@@ -1,9 +1,10 @@
-use app::window::WindowModel;
 use relm4::prelude::*;
 use sys_locale::get_locale;
+use ui::window::WindowModel;
 
-mod app;
 mod constants;
+mod engine;
+mod ui;
 
 rust_i18n::i18n!("locales", fallback = "en-US");
 
