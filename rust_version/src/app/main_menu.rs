@@ -5,8 +5,8 @@ pub struct MainMenuModel;
 
 #[derive(Debug)]
 pub enum MainMenuOutput {
-    CreateMatch,
-    ConnectMatch,
+    GoToCreateServer,
+    GoToCreateClient,
 }
 
 #[relm4::component(pub)]
@@ -35,7 +35,7 @@ impl SimpleComponent for MainMenuModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.output(MainMenuOutput::CreateMatch).unwrap();
+                        sender.output(Self::Output::GoToCreateServer).unwrap();
                     },
                 },
                 adw::ActionRow {
@@ -45,7 +45,7 @@ impl SimpleComponent for MainMenuModel {
                         set_icon_name: Some("go-next-symbolic")
                     },
                     connect_activated[sender] => move |_| {
-                        sender.output(MainMenuOutput::ConnectMatch).unwrap();
+                        sender.output(Self::Output::GoToCreateClient).unwrap();
                     },
                 },
             },
@@ -62,6 +62,4 @@ impl SimpleComponent for MainMenuModel {
 
         ComponentParts { model, widgets }
     }
-
-    fn update(&mut self, message: Self::Input, _: ComponentSender<Self>) {}
 }

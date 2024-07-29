@@ -1,18 +1,18 @@
 use relm4::adw::prelude::*;
 use relm4::prelude::*;
 
-pub struct IdleClientModel;
+pub struct IdleServerModel;
 
 #[derive(Debug)]
-pub enum IdleClientOutput {
+pub enum IdleServerOutput {
     GoToMatch,
 }
 
 #[relm4::component(pub)]
-impl SimpleComponent for IdleClientModel {
+impl SimpleComponent for IdleServerModel {
     type Init = ();
     type Input = ();
-    type Output = IdleClientOutput;
+    type Output = IdleServerOutput;
 
     view! {
         #[root]
@@ -22,15 +22,15 @@ impl SimpleComponent for IdleClientModel {
             set_margin_all: 32,
 
             gtk::Label {
-                set_label: "Connect to server",
+                set_label: "Create server",
                 set_margin_all: 32,
                 set_css_classes: &["title-1"],
             },
             adw::PreferencesGroup {
                 adw::EntryRow {
                     set_valign: gtk::Align::Center,
-                    set_title: "Address",
-                    connect_changed[sender] => move |entry|{
+                    set_title: "Port",
+                    connect_changed[sender] => move |entry| {
                         sender.output(Self::Output::GoToMatch).unwrap()
                     },
                 }
@@ -43,7 +43,7 @@ impl SimpleComponent for IdleClientModel {
         root: &Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let model = IdleClientModel {};
+        let model = IdleServerModel {};
         let widgets = view_output!();
 
         ComponentParts { model, widgets }

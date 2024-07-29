@@ -3,19 +3,12 @@ use relm4::prelude::*;
 use crate::constants;
 
 pub struct AboutModel;
-pub struct AboutInit;
-
-#[derive(Debug)]
-pub enum AboutInput {}
-
-#[derive(Debug)]
-pub enum AboutOutput {}
 
 #[relm4::component(pub)]
 impl SimpleComponent for AboutModel {
-    type Init = AboutInit;
-    type Input = AboutInput;
-    type Output = AboutOutput;
+    type Init = ();
+    type Input = ();
+    type Output = ();
 
     view! {
         adw::AboutWindow {
@@ -38,10 +31,7 @@ impl SimpleComponent for AboutModel {
     ) -> ComponentParts<Self> {
         let model = Self;
         let widgets = view_output!();
-        ComponentParts { model, widgets }
-    }
 
-    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
-        match message {}
+        ComponentParts { model, widgets }
     }
 }
