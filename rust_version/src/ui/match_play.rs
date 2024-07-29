@@ -26,14 +26,14 @@ impl SimpleComponent for MatchPlayModel {
     fn init(
         _init: Self::Init,
         root: &Self::Root,
-        sender: ComponentSender<Self>,
+        _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = MatchPlayModel {};
         let widgets = view_output!();
         let path = std::path::Path::new("./resources/background.png");
         let pixbuf = gtk::gdk_pixbuf::Pixbuf::from_file(path).unwrap();
         widgets.drawing.set_draw_func(
-            move |area: &gtk::DrawingArea, context: &gtk::cairo::Context, w, h| {
+            move |_area: &gtk::DrawingArea, context: &gtk::cairo::Context, _w, _h| {
                 context.set_source_pixbuf(&pixbuf, 0.0, 0.0);
                 context.paint().expect("dfuhi");
                 context.stroke().expect("uiedrfhuiefr");

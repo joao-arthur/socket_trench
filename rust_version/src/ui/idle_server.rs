@@ -30,7 +30,7 @@ impl SimpleComponent for IdleServerModel {
                 adw::EntryRow {
                     set_valign: gtk::Align::Center,
                     set_title: "Port",
-                    connect_changed[sender] => move |entry| {
+                    connect_changed[sender] => move |_entry| {
                         sender.output(Self::Output::GoToMatch).unwrap()
                     },
                 }
