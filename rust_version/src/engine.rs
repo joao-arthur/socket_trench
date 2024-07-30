@@ -40,6 +40,46 @@ impl Point {
     }
 }
 
+pub struct State {
+    pub gos: Vec<GameObject>,
+    gos_c: Vec<GameObject>,
+    gos_d: Vec<GameObject>,
+}
+
+impl State {
+    pub fn from(gos: Vec<GameObject>) -> Self {
+        State {
+            gos,
+            gos_c: Vec::new(),
+            gos_d: Vec::new(),
+        }
+    }
+
+    pub fn create(&mut self, go: GameObject) {
+        self.gos_c.push(go)
+    }
+
+    pub fn delete(&mut self, go: GameObject) {
+        self.gos_d.push(go)
+    }
+
+    pub fn apply(&mut self) {
+        for i_d in 0..self.gos_d.len() {
+            for i in 0..self.gos.len() {
+                if self.gos[i] == self.gos_d[i_d] {
+                    self.gos.remove(i);
+                    break;
+                }
+            }
+        }
+        //self.gos_d
+        //    .drain(..)
+        //    .map(|self, f|
+        //    );
+        self.gos.append(&mut self.gos_c);
+    }
+}
+
 #[derive(Debug, PartialEq)]
 pub struct GameObject {
     pub body: Option<BoxDim>,
@@ -47,6 +87,9 @@ pub struct GameObject {
     pub bounds: Option<BoxPos>,
     pub texture: Option<Pixbuf>,
     pub force: Option<Point>,
+    // pub on_key_pressed: fn(key: i32, state: &EngineState) -> (),
+    // pub on_key_released: fn(key: i32, state: &EngineState) -> (),
+    // pub on_collide_with: fn(other: &GameObject, state: &EngineState) -> (),
 }
 
 impl Default for GameObject {
@@ -115,7 +158,9 @@ mod test {
 
     #[test]
     fn test_apply_physics_empty() {
-        let mut go = GameObject { ..Default::default() };
+        let mut go = GameObject {
+            ..Default::default()
+        };
         apply_physics_in_body(&mut go);
         assert_eq!(go.body, None);
     }
@@ -163,5 +208,75 @@ mod test {
         assert_eq!(go.body, Some(BoxDim::from(2, 2, 20, 20)));
         apply_physics_in_body(&mut go);
         assert_eq!(go.body, Some(BoxDim::from(0, 0, 20, 20)));
+    }
+
+    #[test]
+    fn test_state() {
+        let mut state = State::from(vec![
+            GameObject {
+                body: Some(BoxDim::from(1, 2, 3, 4)),
+                ..Default::default()
+            },
+            GameObject {
+                body: Some(BoxDim::from(2, 3, 4, 5)),
+                ..Default::default()
+            },
+        ]);
+        assert_eq!(
+            state.gos,
+            vec![
+                GameObject {
+                    body: Some(BoxDim::from(1, 2, 3, 4)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(2, 3, 4, 5)),
+                    ..Default::default()
+                }
+            ]
+        );
+        state.create(GameObject {
+            body: Some(BoxDim::from(3, 4, 5, 6)),
+            ..Default::default()
+        });
+        state.create(GameObject {
+            body: Some(BoxDim::from(4, 5, 6, 7)),
+            ..Default::default()
+        });
+        assert_eq!(
+            state.gos,
+            vec![
+                GameObject {
+                    body: Some(BoxDim::from(1, 2, 3, 4)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(2, 3, 4, 5)),
+                    ..Default::default()
+                }
+            ]
+        );
+        state.delete(GameObject {
+            body: Some(BoxDim::from(2, 3, 4, 5)),
+            ..Default::default()
+        });
+        state.apply();
+        assert_eq!(
+            state.gos,
+            vec![
+                GameObject {
+                    body: Some(BoxDim::from(1, 2, 3, 4)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(3, 4, 5, 6)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(4, 5, 6, 7)),
+                    ..Default::default()
+                },
+            ]
+        );
     }
 }
