@@ -248,7 +248,11 @@ class EngineManager(
         for (gameObject in gameObjects) {
             val body = gameObject.getBody()
             if (body != null) {
-                if (body.x + body.w < 0 || body.y + body.h < 0 || body.x > Screen.WIDTH || body.y > Screen.HEIGHT
+                if (
+                    body.x + body.w < 0 ||
+                    body.y + body.h < 0 ||
+                    body.x > Screen.WIDTH ||
+                    body.y > Screen.HEIGHT
                 ) {
                     gameObject.onLeaveScreen(engineState)
                 }
