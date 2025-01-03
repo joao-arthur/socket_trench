@@ -3,8 +3,9 @@ use sys_locale::get_locale;
 use ui::window::WindowModel;
 
 mod constants;
-mod engine;
+//mod engine;
 mod ui;
+mod app;
 
 rust_i18n::i18n!("locales", fallback = "en-US");
 

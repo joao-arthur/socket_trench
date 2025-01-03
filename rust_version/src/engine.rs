@@ -1,5 +1,7 @@
 use relm4::gtk::gdk_pixbuf::Pixbuf;
 
+use crate::app::{SCREEN_HEIGHT, SCREEN_WIDTH};
+
 #[derive(Debug, PartialEq)]
 pub struct BoxDim {
     pub x: i32,
@@ -40,6 +42,7 @@ impl Point {
     }
 }
 
+#[derive(Debug)]
 pub struct State {
     pub gos: Vec<GameObject>,
     gos_c: Vec<GameObject>,
@@ -72,10 +75,7 @@ impl State {
                 }
             }
         }
-        //self.gos_d
-        //    .drain(..)
-        //    .map(|self, f|
-        //    );
+        self.gos_d.clear();
         self.gos.append(&mut self.gos_c);
     }
 }
@@ -87,10 +87,11 @@ pub struct GameObject {
     pub bounds: Option<BoxPos>,
     pub texture: Option<Pixbuf>,
     pub force: Option<Point>,
-    // pub on_key_pressed: fn(key: i32, state: &EngineState) -> (),
-    // pub on_key_released: fn(key: i32, state: &EngineState) -> (),
-    // pub on_collide_with: fn(other: &GameObject, state: &EngineState) -> (),
-}
+    // pub on_key_pressed: Box<dyn Fn(i32, &State) + 'static>,
+    // pub on_key_released: Box<dyn Fn(i32, &State) + 'static>,
+    // pub on_collide_with: Box<dyn Fn(&mut GameObject, &State) + 'static>,
+    // pub on_leave_screen: Box<dyn Fn(&State) + 'static>,
+}   
 
 impl Default for GameObject {
     fn default() -> Self {
@@ -100,6 +101,10 @@ impl Default for GameObject {
             bounds: None,
             texture: None,
             force: None,
+        //    on_key_pressed: Box::new(|_, __| {}),
+        //    on_key_released: Box::new(|_, __| {}),
+        //    on_collide_with: Box::new(|_, __| {}),
+        //    on_leave_screen: Box::new(|_| {}),
         }
     }
 }
@@ -124,6 +129,57 @@ fn apply_physics_in_body(go: &mut GameObject) {
                 }
             }
         }
+    }
+}
+
+fn apply_leave_screen(go: &mut GameObject) {
+    if let Some(body) = &mut go.body {
+        if 
+            body.x + body.w < 0 ||
+            body.y + body.h < 0 ||
+            body.x > SCREEN_WIDTH.into() ||
+            body.y > SCREEN_HEIGHT.into()
+        {
+         //   (go.on_leave_screen)(state)
+        }
+    }
+}
+
+fn apply_collisions_in_collider(state: &mut State) {
+    for i in 0..state.gos.len() {
+        let a = &state.gos[i];
+        if let Some(collider_a) = &a.collider {
+            for j in i+1..state.gos.len() {
+                let mut b = &mut state.gos[j];
+                if let Some(collider_b) = &b.collider {
+                    if 
+                        collider_a.x < collider_b.x + collider_b.w &&
+                        collider_a.x + collider_a.w > collider_b.x &&
+                        collider_a.y < collider_b.y + collider_b.h &&
+                        collider_a.y + collider_a.h > collider_b.y
+                    {
+                        (a.on_collide_with)(&mut b, state);
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct Manager {
+    state: State,
+}
+
+impl Manager {
+    pub fn on_update(self: &mut Self) {
+        self.state.apply();
+        for go in &mut self.state.gos {
+            apply_physics_in_body(go);
+        }
+        for go in &mut self.state.gos {
+            apply_leave_screen(go);
+        }
+        apply_collisions_in_collider(&self.state)
     }
 }
 
@@ -211,6 +267,61 @@ mod test {
     }
 
     #[test]
+    fn test_apply_collisions_in_collider_empty() {
+        let  go1 = GameObject {
+            ..Default::default()
+        };
+        let  go2 = GameObject {
+            ..Default::default()
+        };
+        let gos = vec![go1, go2];
+        let state = State::from(gos);
+        apply_collisions_in_collider(&state);
+        assert_eq!(state.gos[0].body, None);
+        assert_eq!(state.gos[1].body, None);
+    }
+
+    #[test]
+    fn test_apply_collisions_in_collider() {
+        let acc = 0;
+
+        let go1 = GameObject {
+            on_collide_with: |other: &GameObject, state: &State| {
+                acc += 1;
+            },
+            ..Default::default()
+        };
+        let go2 = GameObject {
+            on_collide_with: |other: &GameObject, state: &State| {
+                acc += 1;
+            },
+            ..Default::default()
+        };
+        let gos = vec![go1, go2];
+        let state = State::from(gos);
+        apply_collisions_in_collider(&state);
+    }
+
+    fn on_collide_delete(other: &mut GameObject, state: &State) {
+                state.delete(other);
+
+    }
+
+    #[test]
+    fn test_apply_collisions_in_collider_delete() {
+        let go1 = GameObject {
+            on_collide_with: on_collide_delete,
+            ..Default::default()
+        };
+        let go2 = GameObject {
+            ..Default::default()
+        };
+        let gos = vec![go1, go2];
+        let state = State::from(gos);
+        apply_collisions_in_collider(&state);
+    }
+
+    #[test]
     fn test_state() {
         let mut state = State::from(vec![
             GameObject {
@@ -260,6 +371,24 @@ mod test {
             body: Some(BoxDim::from(2, 3, 4, 5)),
             ..Default::default()
         });
+        state.apply();
+        assert_eq!(
+            state.gos,
+            vec![
+                GameObject {
+                    body: Some(BoxDim::from(1, 2, 3, 4)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(3, 4, 5, 6)),
+                    ..Default::default()
+                },
+                GameObject {
+                    body: Some(BoxDim::from(4, 5, 6, 7)),
+                    ..Default::default()
+                },
+            ]
+        );
         state.apply();
         assert_eq!(
             state.gos,
